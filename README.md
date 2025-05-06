@@ -2,10 +2,10 @@
 ## 線上專案管理工具
 ----------------
 ## 檔案說名
-main.html
-main.css
-main.js
-/static/pixiUI   以PIXI.jS UI框架，按鈕、輸入框、以PIXI.js 為基礎建立的UI框架
+main.html /n
+main.css/n
+main.js/n
+/static/pixiUI   以PIXI.jS UI框架，按鈕、輸入框、以PIXI.js 為基礎建立的UI框架/n
 
 
 ![下午1 28 2025-5-6的影像](https://github.com/user-attachments/assets/e045ad9b-6516-44f3-9a67-abe45dec37d2)
