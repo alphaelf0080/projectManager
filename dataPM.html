@@ -1,0 +1,3231 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    
+    
+.col-fixed {
+  width: 1800px;
+    
+}     
+
+   .submitLabel {
+        font-family: "微軟正黑體";
+        font-size: 1em;
+        color: white;
+        font-weight: 200;
+        letter-spacing: 0.1em
+    }
+    
+    
+    .submitBtn {
+        font-family: "微軟正黑體";
+        font-size: 1em;
+        color: white;
+        font-weight: 200;
+        letter-spacing: 0.1em
+    }
+    /* 按鈕 圓體 */
+
+    @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+    .submitBtnA {
+        font-family: 'cwTeXYen', sans-serif;
+        font-size: 1em;
+        font-weight: 200;
+        letter-spacing: 0.1em
+    }
+
+    
+     /* 專案選取 字型 中文 楷體字型 */
+
+    @import url(https://fonts.googleapis.com/earlyaccess/cwtexkai.css);
+
+    .chineseStyleK {
+        font-family: "cwTeXKai", serif;
+        font-size: 1em;
+        font-weight: lighter;
+        letter-spacing: 0.2em
+    }
+
+
+        /* 專案選取 字型 中文 仿宋體 */
+
+    @import url(https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
+    .chineseStyleS {
+        font-family: 'cwTeXFangSong', serif;
+        font-size: 1em;
+        font-weight: lighter;
+        letter-spacing: 0.2em
+    }
+
+    /* 專案選取 字型 中文黑體 */
+
+    @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+    .chineseStyleST {
+        font-family: 'Noto Sans TC', sans-serif;
+        font-size: 1em;
+        font-weight: lighter;
+        letter-spacing: 0.2em
+    }
+
+    /* 專案選取 字型 明體 */
+
+    @import url(https://fonts.googleapis.com/earlyaccess/cwtexming.css);
+    .chineseStyleMing {
+        font-family: 'cwTeXMing', serif;
+        font-size: 1em;
+        font-weight: lighter;
+        letter-spacing: 0.2em
+    }   
+    
+    
+    #pixiUICanvas {
+            margin: 0;
+            padding: 0px;
+            position:absolute;
+            left:0px;
+            top: 0px;
+        }
+    
+    .userLoginModal {
+         position: absolute;
+   top: 10px;
+   right: 100px;
+   bottom: 0;
+   left: 0;
+   z-index: 10040;
+   overflow: auto;
+   overflow-y: auto;
+        }
+
+    @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+    .chineseStyleModalBold {
+        font-family: 'cwTeXYen', sans-serif;
+        font-size: 1.2em;
+        font-weight: 300;
+        letter-spacing: 0.2em
+    }
+    
+    
+    
+    .publishEditor{
+        
+        background-color: rgba(30,30,30,0.8);
+        
+        
+        
+    }
+
+    @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+    .chineseStyleU_TableHeadBig {
+        font-family: 'cwTeXYen', sans-serif;
+        font-size: 1.2em;
+        font-weight: 100;
+        letter-spacing: 0.2em
+    }
+    
+    
+    .chineseStyleA {
+        font-family: "微軟正黑體";
+        font-size: 1em;
+        color: white;
+        font-weight: 200;
+        letter-spacing: 0.1em
+    }
+
+    .hiddenInfo{
+        
+    }
+    
+    
+     .textEditorA{
+       width:600px;
+         height:600px
+    }
+        
+    
+        }
+
+    #calendar {
+      max-width: 1100px;
+      margin: 40px auto;
+    }
+    
+    @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+    .chineseStyleModalStanded {
+        font-family: 'cwTeXYen', sans-serif;
+        font-size: 1.2em;
+        font-weight: 200;
+        letter-spacing: 0.1em;
+        color: black;
+    }
+    
+    
+</style>   
+<head>
+    <meta charset="UTF-8">
+
+
+
+    <title>days</title>
+
+    <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+    <!-- IE可能不見得有效 -->
+    <META HTTP-EQUIV="EXPIRES" CONTENT="0">
+    <!-- 設定成馬上就過期 -->
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <!-- 與第一行是同樣的作用 -->
+    <!-- local css
+    <link href="{{url_for('static',filename='css/elventPreview.css')}}" rel="stylesheet">
+    -->
+    <!-- local css  end-->
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/cwtexkai.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosanstc.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/cwtexming.css">
+        
+    <!-- pixi cdn 
+        
+    <script src="https://pixijs.download/release/pixi.js"></script>
+    -->  
+    <script src="https://pixijs.download/v6.1.3/pixi.min.js"></script>
+    <!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js"></script>   
+    -->  
+    <script src="{{url_for('static', filename='pixiUI/PIXI.TextInput.js')}}"></script>
+
+    <!-- pixi cdn end-->  
+        
+        
+    <!-- jquery cdn -->   
+    <script
+            src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/color/jquery.color-2.2.0.js" integrity="sha256-gvMJWDHjgDrVSiN6eBI9h7dRfQmsTTsGU/eTT8vpzNg=" crossorigin="anonymous"></script>
+        
+    <script src="{{url_for('static', filename='jqueryPlugin/jquery.mousewheel.js')}}"></script>  
+    <script src="{{url_for('static', filename='jquery.cookie.js')}}"></script>  
+
+    <!-- jquery cdn end-->      
+   
+        
+    <!-- bootstrap cdn -->  
+        
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <!-- bootstrap cdn end-->   
+    
+    <!-- fullcalendar@6.1.5
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js'></script>    
+      -->             
+    <!-- alpha define -->    
+    <script src="{{url_for('static', filename='pixiUI/pixiUI_Btn.js')}}"></script>  
+    <script src="{{url_for('static', filename='pixiUI/pixiUI_Layout.js')}}"></script>  
+    <script src="{{url_for('static', filename='pixiUI/pixiUI_List.js')}}"></script>  
+    <script src="{{url_for('static', filename='pixiUI/pixiUI_Icons.js')}}"></script>  
+    <script src="{{url_for('static', filename='pixiUI/callDataFromDB.js')}}"></script>  
+    <script src="{{url_for('static', filename='pixiUI/checkDate.js')}}"></script>  
+        
+    <script src="{{url_for('static', filename='pixiUI/user_editor.js')}}"></script>  
+    <script src="{{url_for('static', filename='pixiUI/event_sch_list.js')}}"></script>  
+    <script src="{{url_for('static', filename='pixiUI/proj_sch_list.js')}}"></script>  
+    <script src="{{url_for('static', filename='pixiUI/priceList.js')}}"></script>  
+    <script src="{{url_for('static', filename='pixiUI/loadWebFont.js')}}"></script>  
+
+    <script src="{{url_for('static', filename='pixiUI/extraTool.js')}}"></script>  
+    <script src="{{url_for('static', filename='pixiUI/pixi_calander.js')}}"></script>  
+    <script src="{{url_for('static', filename='pixiUI/user_workingTime_calander_editor.js')}}"></script>  
+
+    <script src="{{url_for('static', filename='pixiUI/costPreview.js')}}"></script>  
+     
+    <script src="{{url_for('static', filename='pixiUI/reportList.js')}}"></script>  
+    <script src="{{url_for('static', filename='pixiUI/dataManager.js')}}"></script>  
+    <script src="{{url_for('static', filename='pixiUI/pixi_gratt.js')}}"></script>  
+
+    
+    
+    
+    <script src="{{url_for('static', filename='moment.js')}}"></script>  
+
+         
+
+    <!-- pixiPlugin define -->    
+    <script src="{{url_for('static', filename='pixiPlugin/pixi-mousewheel.js')}}"></script>  
+    
+    
+    <!--文字編輯器 -->    
+    <script src="{{url_for('static', filename='ckeditor/ckeditor.js')}}"></script>  
+    
+    <!--月曆 -->   
+    <!--<script src="{{url_for('static', filename='calendars/datedreamer.js')}}"></script>    
+    <script src="{{url_for('static', filename='calendars/index.global.min.js')}}"></script>  -->  
+    <!--<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js'></script> -->  
+
+    <!-- alpha define end -->   
+    
+      <!-- Moment.js v2.20.0 -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.0/moment.min.js"></script>
+  <!-- FullCalendar v3.8.1 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.min.css" rel="stylesheet"  />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.print.css" rel="stylesheet" media="print"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.min.js"></script>
+    
+    
+    
+    <!-- alpha define old
+    <script src="{{url_for('static', filename='pixiPlugin/viewport.js')}}"></script>  
+
+    <script src="{{url_for('static', filename='stats/stats.js')}}"></script>
+
+    <script src="{{url_for('static', filename='pixiUI_01.js')}}"></script>
+    <script src="{{url_for('static', filename='pixi_callFilter.js')}}"></script>
+    <script src="{{url_for('static', filename='loginEvent.js')}}"></script>
+    <script src="{{url_for('static', filename='importActionDB.js')}}"></script>
+    <script src="{{url_for('static', filename='pmUI_01.js')}}"></script>
+
+    <script src="{{url_for('static', filename='pmUI_standed.js')}}"></script>
+    <script src="{{url_for('static', filename='pmUI_proj.js')}}"></script>
+
+    <script src="{{url_for('static', filename='pmUI_event.js')}}"></script>
+    -->
+
+</head> 
+        
+<body>
+    <canvas class="col-fixed" id="pixiGameInfoCanvas"></canvas>      
+
+
+    <!-- 休假資料上傳視窗-->   
+
+    <div class="modal fade publishEditor " id="publishModal" >
+        <div class="modal-dialog modal-megamenu publishEditor" style="min-width:1000px;">
+            <div class="modal-content " id="">
+                <div class="modal-header  bg-dark text-light" id="">
+                    <h5 class="chineseStyleModalBold w-100 text-center align-middle" id="">休假資料</h5>
+
+                </div>
+   
+                 <div class="modal-header"  id="">
+
+                            <div class='col-12'>
+
+                                <div class='row' >
+
+                                    <div class="chineseStyleModalBold align-middle " id="publishItemPreview" style="width:100% ; height:600px" >
+
+                                          <textarea name="editorDemo" >
+                                                 <p>輸入休假資料</p>
+                                                 <p>暱稱,假別,說明,起始日(YYYY/MM/DD),起始時間(HH:MM),結束日(YY/MM/DD),結束時間(HH:MM),時數</p>
+                                              
+                                          </textarea>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                 </div>
+
+                 <div class="modal-footer ">
+
+                       <T5>  暱稱,假別,說明,起始日(YYYY/MM/DD),起始時間(HH:MM),結束日(YY/MM/DD),結束時間(HH:MM),時數,單號</T5>
+                       
+                       <T5>嘎嘎,特休,家庭出遊,2023/02/24,09:00,2023/02/24,18:00,8.000,TGAW23022000015</T5>
+
+                 </div>
+                 <div class="modal-footer ">
+
+                    <h5 class="chineseStyleModalBold w-100 text-center align-middle text-danger " id=""></h5>
+                 </div>
+                <div class="modal-footer ">
+                       <button type="button" class="btn btn-primary chineseStyleModalBold w-33" id="publishSubmitBtn">確認發佈</button>
+                       <button type="button" class="btn btn-secondary  chineseStyleModalBold w-33" id="publishDropzoneClearBtn">清除</button>
+
+                        <button type="button" class="btn btn-dark chineseStyleModalBold w-33" id="publishCancelBtn">取消</button>
+
+
+                </div>
+
+            </div>
+        </div>
+     </div>  
+
+  <!-- <div id="calendar"></div> -->  
+    <!-- 休假資料上傳視窗-->  
+    
+
+     
+     
+    <!-- Vertically centered modal calendearPopup <div id="calendar"></div> 
+    <div class="modal fade" id="calendearPopup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" style="width:600px ; height: 600px">
+             <div id="calendar"></div>  
+          </div>
+          <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Open second modal</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  -->
+
+
+</body>     
+      
+ <!--   
+<body>
+    <div class="container" >
+        <div class="row" >
+           
+            <div class="col-12" > 
+                <canvas class=""  style="width:130%" id="pixiGameInfoCanvas"></canvas>
+
+
+            </div>
+             
+    
+        </div>
+    </div>
+
+</body>
+        
+      
+  <body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 w-100">
+                <canvas class="" style="width:100%" id="pixiGameInfoCanvas"></canvas>
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+      
+  -->      
+   <!--   
+<div id="calendearPopup" class="modal fade">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 id="modalTitle" class="modal-title"></h4>
+        </div>
+        <div id="modalBody" class="modal-body"> </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+</div>
+   -->    
+   
+ <!-- Add Modal -->
+<div class="modal fade" id="calendearPopup">
+    <div class="modal-dialog" >
+        <div class="modal-content" >
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">選擇日期</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body"  >
+              
+                          <div id="calendarTest" ></div>
+
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+               
+                <T5 class=" w-100 text-center align-middle chineseStyleModalStanded" id="calendearPopupSelectDayText"> 選擇日期</T5>
+                <!-- 
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Add Your Schedule</button>
+                 -->
+            </div>
+        </div>
+    </div>
+</div>      
+           
+               
+                   
+                           
+</html>
+
+
+
+
+
+
+
+
+<script>
+    
+//月曆
+ 
+
+  //  $('#calendar').fullCalendar();
+/*    
+new datedreamer.calendar({
+    element: "#calendarTest", // Required
+    theme: "lite-purple",
+    format: 'YYYY/MM/DD',
+   //  styles:'
+    //        button {
+    //            color: blue
+    //        }
+   //         '
+    // ...other options
+    
+        onChange: (e) => {
+        // Get Date object from event
+       // console.log(e.detail);
+        $('#calendearPopupSelectDayText').text(e.detail)    
+        //console.log( $('#calendearPopupSelectDayText').text(e.detail))
+            
+            
+        }
+})
+  */   
+ 	var calendar = $( "#calendarTest" ).fullCalendar({
+  		// 參數設定[註1]
+         contentHeight: 600
+,
+  //aspectRatio: 0.5,
+
+  		header: { // 頂部排版
+  			left: "prev,next today", // 左邊放置上一頁、下一頁和今天
+  			center: "title", // 中間放置標題
+  			right: "month,basicWeek,basicDay" // 右邊放置月、周、天
+  		},
+  		defaultDate: "2018-02-12", // 起始日期
+  		weekends: false, // 顯示星期六跟星期日
+  		editable: true,  // 啟動拖曳調整日期
+        /*
+  		events: [ // 事件
+  			{ // 事件
+  				title: "約會",
+  				start: "2018-02-01"
+  			},
+  			{ // 事件(包含開始時間)
+  				title: "中餐",
+  				start: "2018-02-12T12:00:00"
+  			},
+  			{ // 事件(包含跨日開始時間、結束時間)
+  				title: "音樂節",
+  				start: "2018-02-07",
+  				end: "2018-02-10"
+  			},
+  			{ // 事件(包含開始時間、結束時間)
+  				title: "會議",
+  				start: "2018-02-12T10:30:00",
+  				end: "2018-02-12T12:30:00"
+  			},
+  			{ // 事件(設定連結)
+  				title: "Click for Google",
+  				url: "http://google.com/",
+  				start: "2018-02-28"
+  			}
+  		]
+        */
+        
+  	});   
+    
+    calendar.on('dayClick', function(date, jsEvent, view) {
+      console.log('clicked on ' + date.format());
+    });
+    
+  
+
+
+    
+    
+// 文字編輯器相關
+    var editor = CKEDITOR.replace('editorDemo');
+    
+ $("#publishSubmitBtn").click(function(e) {
+    //sendFileList =[]
+  //  var fileList = []
+     console.log('publishSubmitBtn')
+              //  console.log($('textarea[name=editorDemo]').val());
+    // console.log(CKEDITOR.instances.editorDemo.getData());
+     
+     var allDataTemp = CKEDITOR.instances.editorDemo.getData()
+        var strA = allDataTemp.replace('<p>','')
+        var strB = strA.replace('</p>','')
+        var allData = strB.split('<br />')
+       // console.log(strB)
+          //console.log(allData.replace(/\r\n/g,""))
+
+    
+     
+     var allDayOffData = []
+
+     for(var i = 0 ;i <allData.length;i++){
+        var newStringList = allData[i].split('\n')
+      //  var strC = newString.replace('\n','')
+         
+        for(var j = 0; j<newStringList.length; j++){
+           // console.log(newStringList[j].length) 
+            if(newStringList[j].length != 0){
+                var selDayOffDBList = newStringList[j].split(',')
+                var userName = selDayOffDBList[0]
+                var dayOffType = selDayOffDBList[1]
+                var dayOffDesc = selDayOffDBList[2]
+              //  var dayOffStartTime = selDayOffDBList[3] + ' ' +selDayOffDBList[4]
+                
+              //  var dayOffStartTime_String = (String(selDayOffDBList[3].split('/')[0]) + ' 年 ' + String(selDayOffDBList[3].split('/')[1]) +  ' 月 ' +String(selDayOffDBList[3].split('/')[2]) + ' 日 ')
+
+                
+                var dayOffEndTime = selDayOffDBList[5] + ' ' +selDayOffDBList[6]
+                var dayOff_TGAW =  selDayOffDBList[8]
+                
+              //  console.log(selDayOffDBList,userName,dayOffType,dayOffDesc,dayOffStartTime,dayOffEndTime,dayOff_TGAW,dayOffStartTime_String)
+              //  Date.parse('2016-11-25T12:30:00+08:00'); // 台灣時區+8
+
+             //   console.log(dayOffStartTime_String)
+                var dayOffStartTime_MS= Date.parse(  String(selDayOffDBList[3].split('/')[0])  +'-'+ String(selDayOffDBList[3].split('/')[1])  +'-'+ String(selDayOffDBList[3].split('/')[2])  +'T'+    String(selDayOffDBList[4]) +':00+08:00' )
+                
+                var dayOffEndTime_MS= Date.parse(  String(selDayOffDBList[5].split('/')[0])  +'-'+ String(selDayOffDBList[5].split('/')[1])  +'-'+ String(selDayOffDBList[5].split('/')[2])  +'T'+    String(selDayOffDBList[6]) +':00+08:00' )
+               // console.log(dayOffStartTime_MS,dayOffEndTime_MS)
+                
+                //console.log(convertMSB( dayOffStartTime_MS ),convertMSB( dayOffEndTime_MS ))
+                
+                var exportDayOff_Data = userName+','+ dayOffType +',' + dayOffDesc +',' + String(dayOffStartTime_MS) +','+ String(dayOffEndTime_MS) +',' + dayOff_TGAW //+'||'
+                allDayOffData.push(exportDayOff_Data + '||')
+            }
+            
+        };
+        //allDayOffData.push(allData[i].replace(/\r\n/g,"");)    
+     };
+               console.log(allDayOffData)
+     
+      //  var te = JSON.stringify(allDayOffData)
+
+       // console.log(te)
+    $.post("/renewMassUserDayOff", {  
+        
+        
+        //runAllAutoEvents
+            'allDayOffData':String(allDayOffData),
+           // 'testtest':te
+                            //'endDayMs':endDayMs,
+                           // 'stringUserList':stringUserList//JSON.stringify(selUserList),
+
+                           // 'endMs':endMs,
+
+
+                    }, function(data) {
+
+
+
+                            console.log(data)
+        
+                        var newDayOffDB = data[5]
+                        for(var i = 0; i<newDayOffDB.length;i++){
+                            var dayOffST_MS =  parseInt( newDayOffDB[i][3] )
+                            console.log(dayOffST_MS)
+                            console.log( convertMSB( dayOffST_MS ))
+                        }
+        
+
+
+                    }) 
+                                                           
+
+
+
+})   
+    
+    
+//// 文字編輯器相關
+    
+    
+    
+const selectUser = '{{user }}'
+const selectProj =  '{{proj }}'
+
+    
+    
+    /*
+    const pixiApp = new PIXI.Application(1920, 1100, {
+        view: document.getElementById('pixiGameInfoCanvas'),
+        antialias: true,
+        backgroundColor: 0x111111,
+        transparent: false
+    });
+*/
+const screenW = 1800
+const screenH = 1000
+//console.log( window.devicePixelRatio)
+const daysApp = new PIXI.Application({
+    view: document.getElementById('pixiGameInfoCanvas'),
+    width: screenW, 
+    height: screenH,
+    backgroundColor: 0x232323,
+    antialias: true,
+    autoDensity: true,
+    //transparent: false,
+   // resolution: window.devicePixelRatio || 1,
+    resolution: devicePixelRatio,
+    });
+   
+    
+    
+const userSelFilterList = ['ALL','GA','GAD','AU','TA']
+   
+document.body.appendChild(daysApp.view);
+    
+//delete PIXI.Renderer.__plugins.interaction;
+  
+daysApp.stage.interactive = true;
+daysApp.stage.hitArea = daysApp.renderer.screen;
+ 
+ 
+//if (!('events' in daysApp.renderer)) {
+ //   daysApp.renderer.addSystem(new PIXI.EventSystem, 'events');
+//};
+
+    
+
+const uiBaseContainer = new PIXI.Container() // all pixi particle effect container
+    uiBaseContainer.name = 'uiBaseContainer';
+    daysApp.stage.addChild(uiBaseContainer) //  tractor UI base container
+    //initial win UI
+    uiBaseContainer.identity = 'none' //'none' ,'user','powerUser','administrator'
+    
+
+    
+
+
+    
+const errMsgBox = new errorMsgBox(uiBaseContainer,0,970,1920,30,'錯 誤 訊 息 :',10,10,14,'0xffffff','errMsgBox_container',1,'0x666666',5,'0x666666',1,1,'0xffffff','error Msg')
+    
+//const editToolWin = new buildToolWin(uiBaseContainer,300,30,150,900)   //輔助視窗，修正路徑，常駐關閉
+
+//userInfoBlock(parent,x,y,w,h,bgColor,fontSize,fontColor,userName)
+const userLoginBtn = new userInfoBlock(uiBaseContainer,1200,20,screenW,30,'0x999999',14,'0xffffff','','0x222222',150)
+       // userLoginBtn.disabled = true
+    
+const userLoginIconBtn = new userLoginBtnWithIcon(uiBaseContainer,20,20,40,40,2,'0xaaffff','0x222222',1.7)
+
+    userLoginIconBtn.on('mousedown', function(){ 
+                  //  let userInfoBG = this.parent
+                   // console.log(this)
+                    var winW = 300
+                    var winH = 500
+                    var openUserLoginWin  =  new buildUserLoginWin(uiBaseContainer,50, 10,winW,winH)
+
+                    });
+
+
+const winList = ['userAddWin','userEditWin_container','projectAddWin_container','daysSelectWin_container','openUserSelectWin_container','projectSelWin_container','projectEditWin_container','UserLoginWin_container','taskList_container','addTask_container','scheduleList_container','userDetialWin_container','taskScheduleListWin_container','priceListEditWin_container','extraToolEditWin_container','setHolidayWin_container','allUserEditWin_container','timeSelectWin_container','reportList_container','taskTypeInfoEditWin_container','projGratt_container']
+
+
+
+                //(parent,x,y,w,h,r,lineColor,fillColor,scale)
+
+//console.log(toolEditBtn)
+    
+    
+//var toolIconsWin = new moveAbleWinBlock(uiBaseContainer,10,50,150,300,'toolIconsWin',200,200,14,'0xffffff','editToolWin_container',1,'0x555555',5,'0x777777',1,1,'0x555555',daysApp,300,300,false)
+//工具欄按鈕
+
+var userEditBtn = new userEditBtnWithIcon(uiBaseContainer,20,60,50,50,5,'0x2a3b50','0x79fffa',1.5)
+
+
+     userEditBtn.on('mousedown', function(){
+
+
+            console.log('點選使用者編輯' ,'dataPM_08')   
+            var userEditWin = new buildSelectUserEditWin(uiBaseContainer,50, 40, 150,300,1)
+                         //   userEditWin.name = 'userEditWin'
+                        for(var item in winList ){
+                          //  console.log(winList[item])
+                            if( winList[item] == 'userEditWin_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                        };
+         
+         
+
+     });
+
+
+
+
+
+var projEditBtn = new projEditBtnWithIcon(uiBaseContainer,20,100,50,50,5,'0x2a3b50','0x85b4b3',1.5)
+
+
+    projEditBtn.on('mousedown', function(){
+                                              //  console.log('click tool btn')
+                                                console.log(this.noteA)
+                                                errMsgBox.text = "點選開啟專案列表"
+                                               // this.tint = "0xff0000"
+                                              //  this.alpha =0
+        
+
+        
+                                                var allProjectList = JSON.parse(window.localStorage.getItem("allProjectList"));
+                                                var userPrefSet = JSON.parse(window.localStorage.getItem("userPrefSet"));
+                                
+                                                var userNameInput = uiBaseContainer.getChildByName('userNameInput')
+                                                    console.log(userNameInput.text)
+                                                    if(userNameInput.text == '未登入'){
+                                                        var loginUserName = 'none'
+                                                        var projSelWin = new buildPorjSelWinC(uiBaseContainer,daysApp,40,40,300,800,userPrefSet,allProjectList,'projectSelWin_container','all')
+
+                                                    }else{
+                                                        var loginUserName = userNameInput.text 
+                                                        var projSelWin = new buildPorjSelWinC(uiBaseContainer,daysApp,40,40,300,800,userPrefSet,allProjectList,'projectSelWin_container','dept')
+                                                        
+                                                        var selUserFavDB = JSON.parse(window.localStorage.getItem("selUserFavDB"));
+                                                        var getProjsData = JSON.parse(window.localStorage.getItem("allProjectList"));
+
+                                                        
+                                                        var userFavProjID = selUserFavDB[7]
+                                                        var userFavProjDB = getProjsData.filter(function(item, index, array){
+                                                            return item[0] == userFavProjID
+                                                        });    
+                                                        console.log(userFavProjID,userFavProjDB,userFavProjDB[0][1])
+
+                                                                
+
+                                                            $.post("/getSelectProjectDataFromDB", {  
+                                                                'searchID':userFavProjID,
+                                                                'userName':loginUserName,
+                                                                'proj_name' : userFavProjDB[0][1],
+                                                                'projType' : userFavProjDB[0][8],
+                                                                'projNameCH' : userFavProjDB[0][2]
+                                                                }, function(data) {
+                                                                    var selProjData = data[1]
+                                                                    var userFavProjList = data[2]
+                                                                    var projType = data[5]
+
+                                                                    var taskData = data[7]
+                                                                    var projSearchIndex = data[6]
+                                                                    var taskStartTimeMs = data[10]
+                                                                    var taskEndTimeMs = data[11]
+                                                                    var projName = data[3]
+                                                                    var projCHName = data[4]
+
+                                                                    // 專案內容頁面
+                                                                    var projectEditWin = new  openProjectEditWinB(uiBaseContainer,360,40,1130,160,daysApp,selProjData,'edit',userFavProjList); 
+
+                                                                    //任務內容頁面
+                                                                    var taskSchListWin = new buildTaskSchListWinB(this,360,205,1130,635,taskData,taskStartTimeMs,taskEndTimeMs,projName,projSearchIndex,projCHName,projType,'','none','none','時間▼')
+
+                                                                  //  console.log(projSearchIndex)
+                                             
+
+
+
+                                                                });  
+
+
+
+                                                                 
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+
+                                                    };
+
+        
+                                                for(var item in winList ){
+                                                  //  console.log(winList[item])
+                                                    if( winList[item] == 'projectSelWin_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                                                };       
+    
+    })
+    
+    
+var taskEditBtn = new taskEditBtnWithIcon(uiBaseContainer,20,140,50,50,5,'0x2a3b50','0x85b4b3',1.5)
+
+
+var priceListEditBtn = new priceListEditBtnWithIcon(uiBaseContainer,20,240,50,50,5,'0x2a3b50','0x85b4b3',1.5)
+
+    priceListEditBtn.on('mousedown', function(){
+
+
+            console.log('點選報價清單編輯' )   
+            var userEditWin = new priceListEditWin(uiBaseContainer,50, 40, 1500,820,1)
+                            userEditWin.name = 'priceListEditWin_container'
+                for(var item in winList ){
+                  //  console.log(winList[item])
+                    if( winList[item] == 'priceListEditWin_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                };
+
+         
+
+     });
+
+var toolEditBtn = new toolEditBtnWithIcon(uiBaseContainer,20,520,50,50,5,'0x2a3b50','0x85b4b3',1.5 )
+
+
+            
+     toolEditBtn.on('pointerover', function(){//this.tint="0xffffff";
+                               //      console.log('點選編輯工具',this,this.position.x,this.position.y)
+                            var winW = 120
+                            var winH = 300
+        
+                            console.log('點選編輯工具',this,this.position.x,this.position.y)
+                          //                  console.log(this.noteA)
+                         //    var extraToolEdit = new buildExtraToolWin(uiBaseContainer,50, 300,winW,winH)
+
+
+                                        })
+                    .on('pointerout', function(){
+                                     //   uiBaseContainer.removeChild(uiBaseContainer.getChildByName('extraToolEditWin_container'))
+                                           // this.alpha = 0
+                                                    })
+                    .on('pointerup', function(){
+                                     //   uiBaseContainer.removeChild(uiBaseContainer.getChildByName('extraToolEditWin_container'))
+
+                                          //  this.alpha = 0 
+
+                                                  })
+                    .on('mousedown', function(){
+                            var winW = 120
+                            var winH = 300
+        
+                            console.log('點選編輯工具',this,this.position.x,this.position.y)
+                                            console.log(this.noteA)
+                             var extraToolEdit = new buildExtraToolWin(uiBaseContainer,50, 300,winW,winH)
+
+                                         //   this.alpha = 0.5
+
+                                                  })
+                    
+                    
+                    
+                    
+////
+//// 月報表資料表單
+////    
+    
+var reportPreviewBtn = new reportPreviewIcon(uiBaseContainer,20,350,50,50,5,'0x2a3b50','0x85b4b3',1.5)
+                  //  });
+     reportPreviewBtn.on('mousedown', function(){
+         console.log('點擊月報表')
+         
+             //   userEditWin.name = 'userEditWin'
+                        for(var item in winList ){
+                          //  console.log(winList[item])
+                            if( winList[item] == 'reportList_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                        };
+         
+         
+          var reportListWin = new  buildReportListWin(uiBaseContainer,60,40,1700,900,1)
+          })
+//var loginBtn = new loginBtnWithIcon(uiBaseContainer,105,500,50,50,5,'0x2a3b50','0x85b4b3',3)
+
+
+//var logoutBtn = new logoutBtnWithIcon(uiBaseContainer,105,600,50,50,5,'0x2a3b50','0x85b4b3',3)
+
+
+
+
+////日曆工具
+var getCalendearBtn = new calendearIcon(uiBaseContainer,20,600,50,50,5,'0x2a3b50','0x85b4b3',1.5)
+
+
+     getCalendearBtn.on('mousedown', function(){
+         console.log('點擊月曆視窗')
+           
+          $('#calendearPopup').modal('show');
+
+                                          
+                
+             //   userEditWin.name = 'userEditWin'
+         /*
+                        for(var item in winList ){
+                          //  console.log(winList[item])
+                            if( winList[item] == 'reportList_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                        };
+       
+         
+          var reportListWin = new  buildReportListWin(uiBaseContainer,60,40,1700,900,1)
+          */
+          })
+
+////甘特圖工具
+var getGrattBtn = new ganttIcon(uiBaseContainer,20,700,50,50,5,'0x2a3b50','0x85b4b3',1.5)
+
+
+     getGrattBtn.on('mousedown', function(){
+         console.log('點擊甘特圖視窗')
+           
+         // $('#calendearPopup').modal('show');
+
+                                          
+                
+             //   userEditWin.name = 'userEditWin'
+         
+                for(var item in winList ){
+                  //  console.log(winList[item])
+                    if( winList[item] == 'projGratt_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                };
+
+         
+        var projTaskData = getProjTaskDataForGratt()
+        
+        var selProjWorkingTimeDB = JSON.parse(window.localStorage.getItem("selProjWorkingTimeDB"));
+
+        console.log(selProjWorkingTimeDB)
+         
+        setTimeout(function () {
+          console.log("開啟專案甘特圖");
+            var reportListWin = new  builtProjGrattGraph(uiBaseContainer,60,40,1600,900,'X專案',55,1)
+        }, 2000 )
+         
+         
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+     })
+
+    
+function getProjTaskDataForGratt(){
+    console.log('get login user')
+    var userNameInput = uiBaseContainer.getChildByName('userNameInput')
+        if(userNameInput.text == '未登入'){
+            var loginUserName = 'none'
+        }else{
+            var loginUserName = userNameInput.text 
+        };   
+
+       
+
+                 $.post("/getSelectProjectDataFromDB", {  
+                                                    'searchID':45,
+                                                    'userName':loginUserName,
+                                                    'proj_name' :'backOff_Monster_Saga',
+                                                    'projType' :'fishing' ,
+                                                    'projNameCH' : '退妖傳'
+                                                    }, function(data) {
+                                                        var selProjData = data[1]
+                                                        var userFavProjList = data[2]
+                                                        var projType = data[5]
+
+                                                        var taskData = data[7]
+                                                        var projSearchIndex = data[6]
+                                                        var taskStartTimeMs = data[10]
+                                                        var taskEndTimeMs = data[11]
+                                                        var projName = data[3]
+                                                        var projCHName = data[4]
+                                                        var selProjWorkingTimeDB = data[12]
+                                                        
+                                                        window.localStorage.setItem("selProjWorkingTimeDB", JSON.stringify(selProjWorkingTimeDB));  // 設定未登入休假資料
+
+                                                        
+                                                      //  console.log(selProjWorkingTimeDB)
+                                                        // 專案內容頁面
+                                                     //   var projectEditWin = new  openProjectEditWinB(uiBaseContainer,360,40,1130,160,daysApp,selProjData,'edit',userFavProjList); 
+                                                        
+                                                        //任務內容頁面
+                                                     //   var taskSchListWin = new buildTaskSchListWinB(this,360,205,1130,635,taskData,taskStartTimeMs,taskEndTimeMs,projName,projSearchIndex,projCHName,projType,'','none','none','時間▼')
+
+                                                      //  console.log(projSearchIndex)
+                                           
+                                           
+                                                      // return selProjWorkingTimeDB
+     
+                                                   
+                                                    });  
+            
+            
+    
+    
+    
+};   
+    
+   // userEditBtnWithIcon
+//initial data    ####### step-01
+
+$(function() {
+
+    getUserCookie()
+    getUserDB()
+    getProjectDB()
+   // getUserPrefSet()
+    getTaskDataFromDB()
+    getHolidaysNow()
+
+   // getUserProj()
+    getPricePref()
+    getTaskTypeCount()
+    
+
+});
+    
+
+
+//initial UI    open selected project
+//固定網址開啟
+$(function(){
+    if(selectProj == ''){
+        console.log('no project selected')
+    }else{
+        
+        console.log('project ID :'+selectProj)
+        
+        
+      //  console.log(this.noteA)
+        errMsgBox.text = "點選開啟專案列表"
+                       // this.tint = "0xff0000"
+                      //  this.alpha =0
+
+
+
+        var allProjectList = JSON.parse(window.localStorage.getItem("allProjectList"));
+        var userPrefSet = JSON.parse(window.localStorage.getItem("userPrefSet"));
+
+        var projSelWin = new buildPorjSelWinC(uiBaseContainer,daysApp,40,40,300,800,userPrefSet,allProjectList,'projectSelWin_container')
+        for(var item in winList ){
+          //  console.log(winList[item])
+            if( winList[item] == 'projectSelWin_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+        }; 
+
+       var selProjData = allProjectList.filter(function(item, index, array){
+
+                       return item[0] === parseInt(selectProj)
+
+        });   
+        var currentSelectProj = selProjData[0]
+        
+        var userNameInput = uiBaseContainer.getChildByName('userNameInput')
+                if(userNameInput.text == '未登入'){
+                    var loginUserName = '未登入'
+                    var selUserDayOffDB =  []
+                    window.localStorage.setItem("selUserDayOffDB", JSON.stringify(selUserDayOffDB));  // 設定未登入休假資料
+
+                }else{
+                    var loginUserName = userNameInput.text 
+                };
+        console.log(loginUserName)
+        
+        console.log(currentSelectProj)
+
+        
+        $.post("/getSelectProjectDataFromDB", {  
+                'searchID':parseInt(currentSelectProj[0]),
+                'userName':loginUserName,
+                'proj_name' : currentSelectProj[1],
+                'projType' : currentSelectProj[8],
+                'projNameCH' : currentSelectProj[2]
+                }, function(data) {
+                    console.log(data)
+                    var selProjData = data[1]
+                    var userFavProjList = data[2]
+                    var projType = data[5]
+
+                    var taskData = data[7]
+                    var projSearchIndex = data[6]
+                    var taskStartTimeMs = data[10]
+                    var taskEndTimeMs = data[11]
+                    var projName = data[3]
+                    var projCHName = data[4]
+
+                    // 專案內容頁面
+                    var projectEditWin = new  openProjectEditWinB(uiBaseContainer,360,40,1130,160,daysApp,selProjData,'edit',userFavProjList); 
+
+                    //任務內容頁面
+                    var taskSchListWin = new buildTaskSchListWinB(this,360,205,1130,635,taskData,taskStartTimeMs,taskEndTimeMs,projName,projSearchIndex,projCHName,projType,'','none','none','時間▼')
+
+
+        });  
+                                                        
+        
+        
+        
+        
+        
+        
+    }; 
+    
+    
+    
+    
+});    
+    
+// 取得task統計類分類
+function getTaskTypeCount(){
+     $.post("/getTaskTypeCount", {   //runAllAutoEvents
+                 
+                            }, function(data) {
+                             //   console.log(data)
+                                
+                                var taskTypeCountDB = data[0]
+                                var taskType_list = data[1]
+                             //   console.log(taskType_list)
+                                window.localStorage.setItem("taskTypeCountDB", JSON.stringify(taskTypeCountDB));
+                                window.localStorage.setItem("taskType_list", JSON.stringify(taskType_list));
+
+
+                            });    
+    
+};  
+
+
+    
+function getHolidaysNow(){
+    
+    console.log('getHolidaysNow')
+    
+
+    //checkDetaTime()
+    // 取得所有假日資訊
+      $.post("/getHolidaysNow", {   //runAllAutoEvents
+                 
+                            }, function(data) {
+                             //   console.log(data)
+    
+                                var holidaysMsList = data[2]
+
+                                window.localStorage.setItem("holidaysMsList", JSON.stringify(holidaysMsList));
+
+
+                            }); 
+        var dayDate = new Date()
+
+        var thisYear = dayDate.getFullYear()
+
+        $.post("/getHolidaysDB", {   //runAllAutoEvents
+            'year':thisYear,
+
+
+        }, function(data) {
+            console.log(data)
+            var allHolidaysDB = data[3]
+            //var selYear = data[1]
+            window.localStorage.setItem("allHolidaysDB", JSON.stringify(allHolidaysDB));
+
+
+
+        }); 
+
+    
+    
+    
+    
+    
+}    
+        
+function getUserCookie(){
+    
+   // $.removeCookie('loginID')  
+    
+    console.log($.cookie('loginID'))  
+    
+    var loginID = $.cookie('loginID')
+    
+    if( loginID == undefined){
+        
+        console.log('no loginID in cookie')
+        
+        userPrefSet = [0,0,'none','全部','未指定','','']
+        var userNameInput = uiBaseContainer.getChildByName('userNameInput')
+        userNameInput.text = '未登入'
+        window.localStorage.setItem("userPrefSet", JSON.stringify(userPrefSet));
+
+        
+    }else{
+        console.log('login cookie',loginID)
+        var userNameInput = uiBaseContainer.getChildByName('userNameInput')
+        userNameInput.text = loginID
+        
+        //讀取 user 設定
+       $.post("/getUserFav", {   //runAllAutoEvents
+        'user_name':loginID,
+
+            }, function(data) {
+        console.log(data)
+           var userPrefSet = data[1]
+           
+           window.localStorage.setItem("userPrefSet", JSON.stringify(userPrefSet));
+          // window.localStorage.setItem("userFavProjDB", JSON.stringify(userFavProjDB));
+        //   window.localStorage.setItem("userFavTaskDB", JSON.stringify(userFavTaskDB));
+
+            getUserProj()
+
+            openDefautWin()
+ 
+           
+       
+       })
+        //get user data
+        getSelUserData(loginID)
+        
+        
+    }
+    
+};
+    
+
+    
+    
+function getUserProj(){
+    
+    console.log('getUserProj')
+    
+        if( userNameInput.text == "未登入"){
+            console.log('未登入帳號，未有選擇執行狀況')
+            var loginUserName = 'none'
+
+        }else{
+
+            var loginUserName = userNameInput.text  
+            console.log('已登入帳號，讀取選擇執行狀況',loginUserName)
+
+            /*
+            $.post("/storeUserFav", {   //runAllAutoEvents
+                    'userName':loginUserName,
+                    'proj_list_filter' :selFilterBtnGrp.assetType,
+                    'proj_type_filter' :selprojectTypeFilterBtnGrp.assetType
+
+                    }, function(data) {
+                        console.log(data)
+
+                       // projState.text = data[1][0]
+                       // return_enName.text = data[1][1]
+
+
+            })
+
+            */
+            $.post("/getDefineProjDB", {   //runAllAutoEvents
+                        'userName':loginUserName,
+                      //  'proj_list_filter' :selFilterBtnGrp.assetType,
+                      //  'proj_type_filter' :selprojectTypeFilterBtnGrp.assetType
+
+                        }, function(data) {
+                           console.log('getDefineProjDB_____________________________1')
+
+                            console.log(data)
+                            var selUserFavDB = data[5]
+                            console.log(selUserFavDB)
+                            var selUserDB = data[10]
+                            console.log(selUserDB)
+
+                            window.localStorage.setItem("selUserFavDB", JSON.stringify(selUserFavDB));
+                            window.localStorage.setItem("selUserDB", JSON.stringify(selUserDB));
+
+                           // var userFavProjDB = data[9]
+                          //  var userFavTaskDB = data[9]
+
+
+                          //  window.localStorage.setItem("userFavProjDB", JSON.stringify(userFavProjDB));
+                          //  window.localStorage.setItem("userFavTaskDB", JSON.stringify(userFavTaskDB));
+
+                           // projState.text = data[1][0]
+                           // return_enName.text = data[1][1]
+
+
+            })
+    
+            
+        };
+        
+        console.log(loginUserName)
+    
+
+    
+    
+    
+};    
+    
+function getPricePref(){
+    
+    $.post("/getPricePrefDB", {   //runAllAutoEvents
+                   // 'userName':loginUserName,
+                  //  'proj_list_filter' :selFilterBtnGrp.assetType,
+                  //  'proj_type_filter' :selprojectTypeFilterBtnGrp.assetType
+
+                    }, function(data) {
+                       console.log('getPricePrefDB_____________________________1')
+ 
+                     //   console.log(data)
+                        var pricePrefDB = data[1]
+                      //  var userFavTaskDB = data[9]
+                        console.log(pricePrefDB)
+
+            
+                        window.localStorage.setItem("pricePrefDB", JSON.stringify(pricePrefDB));
+                      //  window.localStorage.setItem("userFavTaskDB", JSON.stringify(userFavTaskDB));
+
+                       // projState.text = data[1][0]
+                       // return_enName.text = data[1][1]
+
+
+                })
+       
+    $.post("/getPriceElementDB", {   //runAllAutoEvents
+
+
+                                        }, function(data) {
+                                            console.log('getPriceElementDB')
+                                            //console.log(data)
+                                            var priceElementDB = data[1]
+                                            //var pricePrefDB = data[1]
+                                           // console.log(pricePrefDB)
+
+
+                                            window.localStorage.setItem("priceElementDB", JSON.stringify(priceElementDB));
+                                          //  window.localStorage.setItem("userFavTaskDB", JSON.stringify(userFavTaskDB));
+
+                                           // projState.text = data[1][0]
+                                           // return_enName.text = data[1][1]
+
+
+                })
+    
+    
+};   
+    
+    
+    // 登入後 內建開啟
+function openDefautWin(){
+    
+
+    var winW =1500
+    var winH = 900
+    
+   // var openScheduleListWin  =  new buildScheduleListWin(uiBaseContainer,162, 30,winW,winH)
+
+    for(var item in winList ){
+            if( winList[item] == 'scheduleList_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+    };
+    
+    
+    
+    
+};
+// background tools
+/*
+$(function() {
+
+  //  console.log(uiBaseContainer) 
+
+   var backgroundToolWin = new addWinBlock(uiBaseContainer, 1600, 5, 300,700, 'background Tool',10,10, 14, '0xeeeeee', 'backgroundToolWin_container',1,'0xaaaaff',5,'0x555555',1,0.5)
+
+
+
+        var createDaysDataInDB_Btn = new basicBtn(backgroundToolWin,100,100,100,30,14,'hello world',1,'0xff0000','0xff0000','0xff00ff',5,'stand',10,true)
+
+            createDaysDataInDB_Btn.on('mousedown', function(){ 
+                    console.log('run createDaysDataInDB_Btn Btn')
+
+                            $.post("/createNewDaysData", {   //runAllAutoEvents
+                             //   'relfashTaskTime':relfashTaskTime
+                                }, function(data) {
+
+                                      console.log(data)
+
+                                }); 
+
+            });
+
+
+
+});
+*/     
+// getAllTaskDB
+function getTaskDataFromDB(){   
+    
+    $.post("/getTaskDataFromDB", {   //runAllAutoEvents
+
+        }, function(data) {   
+       // console.log(data) 
+            var taskTypeData = data[1]
+            var allTasksData = data[2]
+            window.localStorage.setItem("taskTypeData", JSON.stringify(taskTypeData));
+            window.localStorage.setItem("allTasksData", JSON.stringify(allTasksData));
+
+        
+    });
+    
+    
+    
+   
+    
+}; 
+    
+    
+//get all projects fromDB
+function getProjectDB(){
+    $.post("/getAllProjectTypeDB", {   //runAllAutoEvents
+
+        }, function(data) {
+        
+        console.log(data)  
+        var projectTypeData = data[1]
+        var projectTypeList= []
+                for(var i=0;i<projectTypeData.length;i++){
+                    projectTypeList.push(projectTypeData[i][1])  
+                    
+                }
+                window.localStorage.setItem("projectTypeList", JSON.stringify(projectTypeList));
+        
+
+        
+    });
+    
+     $.post("/getAllProjectDataDB", {   //runAllAutoEvents
+
+        }, function(data) {
+        
+        console.log(data)  
+        var allProjectList = data[1]
+        window.localStorage.setItem("allProjectList", JSON.stringify(allProjectList));
+        
+        
+        
+    });
+    
+       
+    
+};
+    
+function getAllProjectsDataFromDB(filter){
+      
+    console.log('getAllProjectsDataFromDB')
+    
+    var getProjsData = JSON.parse(window.localStorage.getItem("allProjectList"));
+    
+    console.log(getProjsData)
+    
+    
+    if(filter == 'all'){
+         var filterProjsData = getProjsData
+        
+    }else if(filter == '進行中'){
+        console.log('找出進行中專案')
+        
+        var filterProjsData = getProjsData.filter(function(item, index, array){
+                  return item[14] == '進行中'
+                }); 
+
+             
+     }
+   // console.log(filterProjsData)
+    var projsCount = filterProjsData.length
+
+
+    
+    
+    
+    
+    return [projsCount,filterProjsData]
+    
+    
+    
+};
+    
+    
+    
+    
+    
+//get All user Data from DB
+function getUserDB(){
+    console.log('getUserDB')
+    $.post("/getAllUserDB", {   //runAllAutoEvents
+
+        }, function(data) {
+
+          //  console.log(data)
+
+            var deptData = data[4]
+               // console.log(deptData)
+                window.localStorage.setItem("deptData", JSON.stringify(deptData));
+            var userData = data[2]
+                window.localStorage.setItem("userData", JSON.stringify(userData));
+                 //   console.log(userData)
+            var userNameList = data[1]
+                window.localStorage.setItem("userNameList", JSON.stringify(userNameList));
+        
+        
+            var imData = data[5]
+            var imList= []
+                for(var i=0;i<imData.length;i++){
+                    imList.push(imData[i][1])  
+                    
+                }
+                window.localStorage.setItem("imList", JSON.stringify(imList));
+            var designerData = data[6]
+            var designerList = []
+            
+                for(var i=0;i<designerData.length;i++){
+                    designerList.push(designerData[i][1])  
+                    
+                }
+                window.localStorage.setItem("designerList", JSON.stringify(designerList));
+        
+            var chiefArtistList = []
+            
+            for(var i=0;i<userData.length;i++){
+                if(userData[i][29]=="主美"){
+                    chiefArtistList.push(userData[i][2])
+                    
+                }
+                
+            }
+            window.localStorage.setItem("chiefArtistList", JSON.stringify(chiefArtistList));
+        
+
+    }); 
+    
+    
+    $.post("/getJobPositionFromDB", {   //runAllAutoEvents
+
+    }, function(data) {
+      //  console.log('bbbbbbbbbbbbbbb')
+      //  console.log(data)
+        var jobPositionDB = data[2]
+       // console.log()
+        window.localStorage.setItem("jobPositionDB", JSON.stringify(jobPositionDB));
+
+        
+    })
+    
+    $.post("/getUserSearchFilter", {   //runAllAutoEvents
+
+    }, function(data) {
+      //  console.log('bbbbbbbbbbbbbbb')
+        console.log(data)
+        var userSearchFilter = data[1]
+        window.localStorage.setItem("userSearchFilter", JSON.stringify(userSearchFilter));
+
+        
+    })
+    
+
+
+
+};
+
+
+    
+// get days data
+function getDaysDataFromDB(fromDays,toDays){
+
+    console.log(fromDays,toDays)
+
+    $.post("/getDaysDataFromDB", {   //runAllAutoEvents
+            'fromDays':fromDays,
+            'toDays':toDays
+
+            }, function(data) {
+
+                  console.log(data)
+
+    }); 
+
+};
+    
+    
+//工具欄UI
+    
+function buildToolWin(parent,x,y,w,h){
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+  //  var toolsBoxWin = new addWinBlock(uiBaseContainer, x, y, w,h, '編 輯 工 具',10,10, 14, '0xeeeeee', 'userAddWin_container',1,'0xaaaaff',5,'0x555555',1,0.5);
+    var editToolWIn = new moveAbleWinBlock(uiBaseContainer,x,y,w,h,'edit Tools',20,20,14,'0xffffff','editToolWin_container',1,'0x555555',5,'0x777777',1,1,'0x555555',daysApp,screenW,screenH,false)
+
+        // 開啟新增帳號視窗
+    /*
+    var newUserAddBtn = new buildBtnScaleA(editToolWIn,5,40,120,30,'新增帳號','primary')
+        newUserAddBtn.name = 'newUserAddBtn'
+        newUserAddBtn.on('mousedown', function(){
+                            console.log('press 新增帳號')
+                            uiBaseContainer.removeChild(uiBaseContainer.getChildByName("userAddWin"))
+                            var userAddWin = new buildUserAddWin(uiBaseContainer,500, 10, 430,800,)
+                                userAddWin.name = 'userAddWin';
+            
+                           // console.log(uiBaseContainer)
+                           // console.log(winList)
+                            for(var item in winList ){
+                              //  console.log(winList[item])
+                                if( winList[item] == 'userAddWin'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                            }
+                            });
+    */ 
+    
+   // 開啟人員編輯視窗
+ 
+    /*
+    var userEditWinBtn = new buildBtnScaleA(editToolWIn,5,80,120,30,'人員編輯','primary')
+        userEditWinBtn.name = 'userEditWinBtn'
+        userEditWinBtn.on('mousedown', function(){
+                            console.log('press 人員編輯')
+                           // uiBaseContainer.removeChild(uiBaseContainer.getChildByName("userEditWin"))
+
+                            var userEditWin = new buildUserEditWin(uiBaseContainer,40, 40, 600,800,)
+                                userEditWin.name = 'userEditWin'
+                            for(var item in winList ){
+                              //  console.log(winList[item])
+                                if( winList[item] == 'userEditWin_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                            }
+                          //  console.log(uiBaseContainer)
+                            });
+    
+    */
+    //debug show all child under uiBaseContainer
+      
+    var showAllChildUnderUiBaseContainer = new buildBtnScaleA(editToolWIn,5,120,120,30,'顯示子物件','primary')
+        showAllChildUnderUiBaseContainer.name = 'showAllChildUnderUiBaseContainer'
+        showAllChildUnderUiBaseContainer.on('mousedown', function(){
+                            console.log('press 顯示子物件')
+
+             
+                            console.log(uiBaseContainer.children)
+            
+                            });
+    
+    
+    
+    
+    var newProjectAddBtn = new buildBtnScaleA(editToolWIn,5,160,120,30,'新增專案','primary')
+        newProjectAddBtn.name = 'newUserAddBtn'
+        newProjectAddBtn.on('mousedown', function(){
+                            console.log('press 新增專案')
+                            var projectAddWin = new buildProjectAddWin(uiBaseContainer,1000, 10, 600,800,)
+                            projectAddWin.name = 'projectAddWin'
+                            for(var item in winList ){
+                              //  console.log(winList[item])
+                                if( winList[item] == 'projectAddWin_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                            }
+                            });
+    
+    
+    var openDaysWin = new buildBtnScaleA(editToolWIn,5,200,120,30,'時間選擇','primary')
+        openDaysWin.name = 'newUserAddBtn'
+        openDaysWin.on('mousedown', function(){
+                            console.log('press 時間選擇')
+                            var openDaysSelWin = new buildDaysSelWin(uiBaseContainer,400, 10, 600,800,'')
+                          //  projectAddWin.name = 'projectAddWin'
+                            for(var item in winList ){
+                              //  console.log(winList[item])
+                                if( winList[item] == 'daysSelectWin_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                                }
+                            });
+
+        
+    var openUserSelectWin = new buildBtnScaleA(editToolWIn,5,240,120,30,'人員選擇','primary')
+        openUserSelectWin.name = 'openUserSelectWin'
+        openUserSelectWin.on('mousedown', function(){
+                            console.log('press 人員選擇')
+                            var userNameList = JSON.parse(window.localStorage.getItem("userNameList"));
+                            var openDaysSelWin  = new buildSelectionWin(uiBaseContainer,800,100,600,800,'人員選擇',userNameList,'',true)
+
+                          //  projectAddWin.name = 'projectAddWin'
+                            for(var item in winList ){
+                                if( winList[item] == 'openUserSelectWin_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                                }
+            
+                            });
+    // 專案選擇 BTN
+    var openProjSelectBtn = new buildBtnScaleA(editToolWIn,5,280,120,30,'專案選擇','primary')
+        openProjSelectBtn.name = 'openProjSelectBtn'
+        openProjSelectBtn.on('mousedown', function(){
+                            console.log('press 專案選擇')
+                         //   var userNameList = JSON.parse(window.localStorage.getItem("userNameList"));
+                            var openProjectSelWin  =  new buildProjectSelectWin(uiBaseContainer,160, 35,700,900)
+
+                          //  projectAddWin.name = 'projectAddWin'
+                            for(var item in winList ){
+                                if( winList[item] == 'projectSelWin_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                                };
+
+            
+                            });
+    
+    // 專案編輯 BTN
+    var openProjEditBtn = new buildBtnScaleA(editToolWIn,5,320,120,30,'專案編輯','primary')
+        openProjEditBtn.name = 'openProjEditBtn'
+        openProjEditBtn.on('mousedown', function(){
+                            console.log('press 專案編輯')
+                            var winW = 300
+                            var openProjectEditWin  =  new buildProjectEditWin(uiBaseContainer,screenW-winW, 30,winW,screenH-100,'searchID')
+
+                            for(var item in winList ){
+                                if( winList[item] == 'projectEditWin_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                                };
+
+            
+                            });
+    
+    
+    
+    // 人員登入 BTN
+    var openUserLoginBtn = new buildBtnScaleA(editToolWIn,5,360,120,30,'人員登入','primary')
+        openUserLoginBtn.name = 'openUserLoginBtn'
+        openUserLoginBtn.on('mousedown', function(){
+                            console.log('press 專案編輯')
+                         //   var userNameList = JSON.parse(window.localStorage.getItem("userNameList")); UserLoginWin_container UserLogin_container
+                            var winW = 300
+                            var winH = 500
+                           // var openUserLoginWin  =  new buildUserLoginWin(uiBaseContainer,screenW/2 - winW/2, screenH/2-winH/2,winW,winH)
+                            var openUserLoginWin  =  new buildUserLoginWin(uiBaseContainer,50, 10,winW,winH)
+                            for(var item in winList ){
+                                if( winList[item] == 'UserLoginWin_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                                };
+
+            
+                            }); 
+    
+    
+       // taskList BTN
+    var openTaskListBtn = new buildBtnScaleA(editToolWIn,5,400,120,30,'Task List','primary')
+        openTaskListBtn.name = 'openTaskListBtn'
+        openTaskListBtn.on('mousedown', function(){
+                            console.log('press Task List')
+                         //   var userNameList = JSON.parse(window.localStorage.getItem("userNameList"));
+                            var winW = 730
+                            var winH = 900
+                            var openTaskListWin  =  new buildTaskListWin(uiBaseContainer,1280, 35,winW,winH,0)
+                            
+                           // for(var item in winList ){
+                           //     if( winList[item] == 'taskList_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                            //    };
+
+            
+                            }); 
+     
+    
+        // add task BTN
+    var addTaskBtn = new buildBtnScaleA(editToolWIn,5,440,120,30,'add Task','primary')
+        addTaskBtn.name = 'addTaskBtn'
+        addTaskBtn.on('mousedown', function(){
+                            console.log('press add task')
+                         //   var userNameList = JSON.parse(window.localStorage.getItem("userNameList"));
+                            var winW = 400
+                            var winH = 500
+                            var openAddTasktWin  =  new buildAddTaskWin(uiBaseContainer,screenW/2-winW/2, screenH/2-winH/2,winW,winH,'projectEN_name','projectCH_name','project_SearchID')
+                                
+                           // for(var item in winList ){
+                           //     if( winList[item] == 'addTask_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                            //    };
+
+            
+                            }); 
+        
+    
+    
+    
+         //  schedule list BTN
+    var scheduleListBtn = new buildBtnScaleA(editToolWIn,5,480,120,30,'顯 示 排 程','primary')
+        scheduleListBtn.name = 'scheduleListBtn'
+        scheduleListBtn.on('mousedown', function(){
+                            console.log('press add task')
+                         //   var userNameList = JSON.parse(window.localStorage.getItem("userNameList"));
+                            var winW =1700
+                            var winH = 900
+                           // var openScheduleListWin  =  new buildScheduleListWin(uiBaseContainer,162, 30,winW,winH)
+                                
+                         for(var item in winList ){
+                                if( winList[item] == 'scheduleList_container'){}else{uiBaseContainer.removeChild(uiBaseContainer.getChildByName(winList[item]))}
+                                };
+
+            
+                            }); 
+           
+
+    var fixDBURL_Btn = new buildBtnScaleA(editToolWIn,5,680,120,30,'修正路徑','danger')
+        fixDBURL_Btn.name = 'fixDBURL_Btn'
+        fixDBURL_Btn.on('mousedown', function(){
+                var userNameInput = uiBaseContainer.getChildByName('userNameInput')
+
+                console.log(userNameInput.text)
+    
+                        
+                            console.log('修正資料庫路徑')
+                        if(userNameInput.text == 'alpha'){
+
+                              $.post("/fixDBURL", {   //runAllAutoEvents
+
+
+                                            }, function(data) {
+                                                console.log(data)
+
+
+
+                                            }) 
+
+                        }else{
+                            errMsgBox.text = ' 權限不足 '
+                            
+                        }
+
+            
+                }); 
+             
+    
+    
+};
+
+
+    
+//add task win
+function buildAddTaskWin(parent,x,y,w,h,projectEN_name,projectCH_name,project_SearchID){
+    parent.removeChild(parent.getChildByName("addTask_container"))
+    
+    var userNameList = JSON.parse(window.localStorage.getItem("userNameList"));
+    var taskTypeData = JSON.parse(window.localStorage.getItem("taskTypeData"));
+
+    var taskTypeList = []
+    for (var i =0; i<taskTypeData.length;i++ ){
+        taskTypeList.push(taskTypeData[i][1])
+        
+        
+        
+    }
+    
+    
+    
+    var addTaskWin = new moveAbleWinBlock(uiBaseContainer,x,y,w,h,'新增 Task',20,20,14,'0xffffff','addTask_container',1,'0xaaaaaa',2,'0x333333',1,1,'0x667777',daysApp,screenW,screenH,true)
+        addTaskWin.name = 'addTask_container'
+
+    
+    var parentProjSearchID_InputBox = new inputBoxWithLabel(addTaskWin,30,50,110,250,3,'專案 ID:','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x777777')
+        parentProjSearchID_InputBox.text = project_SearchID
+        parentProjSearchID_InputBox.disabled = true 
+    
+    
+    var parentProjEN_Name_InputBox = new inputBoxWithLabel(addTaskWin,30,80,110,250,3,'專案英文名稱:','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x777777')
+        parentProjEN_Name_InputBox.text = projectEN_name
+        parentProjEN_Name_InputBox.disabled = true 
+
+    var parentProjCH_Name_InputBox = new inputBoxWithLabel(addTaskWin,30,110,110,250,3,'專案中文名稱:','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x777777')
+        parentProjCH_Name_InputBox.text = projectCH_name
+        parentProjCH_Name_InputBox.disabled = true 
+   
+    
+    
+    
+    var newTaskName_InputBox = new inputBoxWithLabel(addTaskWin,30,150,110,250,3,'Task 名稱:','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        newTaskName_InputBox.text = 'Task name'
+       // newTaskName_InputBox.disabled = true 
+    
+    var newTaskDesc_InputBox = new inputBoxWithLabel(addTaskWin,30,180,110,250,3,'Task 說明:','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        newTaskDesc_InputBox.text = 'Task 說明'
+       // newTaskName_InputBox.disabled = true 
+    
+    
+    var newTaskType_InputBox = new inputBoxWithLabel(addTaskWin,30,210,110,250,3,'Task 類型','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        newTaskType_InputBox.text = 'Task 類型'
+        newTaskType_InputBox.disabled = true 
+        newTaskType_InputBox.disabled = true
+
+        newTaskType_InputBox.interactive = true;
+        newTaskType_InputBox.buttonMode = true;
+        newTaskType_InputBox.on('pointerover', function(){this.alpha=0.5;})
+                       .on('pointerout', function(){this.alpha=1;})
+                        .on('mousedown',function(){this.alpha=0.5;
+                                var openDaysSelWin  = new buildSelectionWin(uiBaseContainer,addTaskWin.x+w,addTaskWin.y,600,800,'任務類型',taskTypeList,newTaskType_InputBox,false)
+
+                                                  // buildSelectionWin(uiBaseContainer,x-600,50,600,800,'選擇主美',userNameList,artistSel_inputBox)
+                                                  })
+                        .on('pointerup', function(){this.alpha=1;})
+
+      
+    
+    //taskTypeList
+    
+    
+    var artistSel_inputBox = new inputBoxWithLabel(addTaskWin,30,250,110,250,3,'執行人員','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        artistSel_inputBox.text = "未選擇"
+        artistSel_inputBox.disabled = true
+
+        artistSel_inputBox.interactive = true;
+        artistSel_inputBox.buttonMode = true;
+        artistSel_inputBox.on('pointerover', function(){this.alpha=0.5;})
+                       .on('pointerout', function(){this.alpha=1;})
+                        .on('mousedown',function(){this.alpha=0.5;
+                                var openDaysSelWin  = new buildSelectionWin(uiBaseContainer,addTaskWin.x+w,addTaskWin.y,600,800,'人員選擇',userNameList,artistSel_inputBox,true)
+
+                                                  // buildSelectionWin(uiBaseContainer,x-600,50,600,800,'選擇主美',userNameList,artistSel_inputBox)
+                                                  })
+                        .on('pointerup', function(){this.alpha=1;})
+
+
+
+    var parentTaskSel_inputBox = new inputBoxWithLabel(addTaskWin,30,280,110,250,3,'上層 Task:','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        parentTaskSel_inputBox.text = "未選擇"
+        parentTaskSel_inputBox.disabled = true
+        parentTaskSel_inputBox.interactive = true;
+        parentTaskSel_inputBox.buttonMode = true;
+
+        parentTaskSel_inputBox.on('pointerover', function(){this.alpha=0.5;})
+                   .on('pointerout', function(){this.alpha=1;})
+                    .on('mousedown',function(){this.alpha=0.5;
+                                              //  buildSelectionWin(uiBaseContainer,x-600,50,600,800,'選擇IM',imList,IMSel_inputBox)
+
+                                              })
+                    .on('pointerup', function(){this.alpha=1;})
+    
+    var dayDate = new Date()
+    
+    var selYear = dayDate.getFullYear()
+    var selMonth = dayDate.getMonth() +1
+    var selDay = dayDate.getDate() 
+    
+    
+    var startDay_InputBox = new inputBoxWithLabel(addTaskWin,30,310,110,250,3,'起始日期:','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        startDay_InputBox.text = selYear + " 年 "+ selMonth + ' 月 ' + selDay + ' 日 '
+        startDay_InputBox.disabled = true
+    
+    
+    
+    
+    var endDay_InputBox = new inputBoxWithLabel(addTaskWin,30,340,110,250,3,'結束日期:','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        endDay_InputBox.text = selYear + " 年 "+ selMonth + ' 月 ' + selDay + ' 日 '
+        endDay_InputBox.disabled = true
+
+    
+        startDay_InputBox.interactive = true;
+        startDay_InputBox.buttonMode = true;
+        startDay_InputBox.on('pointerover', function(){this.alpha=0.5;})
+                       .on('pointerout', function(){this.alpha=1;})
+                        .on('mousedown',function(){this.alpha=0.5;
+                                                   var posX = x -470
+                                                    var posY = y + 10
+
+                                                    var openDaysSelWin = new buildDaysSelWin(uiBaseContainer,posX, posY, 600,800,startDay_InputBox)
+                                                  })
+                        .on('pointerup', function(){this.alpha=1;})
+
+
+        endDay_InputBox.interactive = true;
+        endDay_InputBox.buttonMode = true;
+        endDay_InputBox.on('pointerover', function(){this.alpha=0.5;})
+                       .on('pointerout', function(){this.alpha=1;})
+                        .on('mousedown',function(){this.alpha=0.5;
+                                                  var posX = x -470
+                                                    var posY = y + 10
+
+                                                   var openDaysSelWin = new buildDaysSelWin(uiBaseContainer,posX, posY, 600,800,endDay_InputBox)
+
+                                          })
+                        .on('pointerup', function(){this.alpha=1;})
+
+    
+        var addTaskBtn = new buildInputBoxBtn(addTaskWin,50,450,100,20,11,'新增 Task','0xffffff','white_outline')
+       // return addTaskWin
+    
+        
+        addTaskBtn.on('mousedown',function(){
+                    console.log('press 新增 Task')
+                    var projectSearchID = parentProjSearchID_InputBox.text
+                    var taskName = newTaskName_InputBox.text
+                    var taskDesc = newTaskDesc_InputBox.text
+                    var taskType = newTaskType_InputBox.text
+                    var user_name = artistSel_inputBox.text
+                    var parentTask = parentTaskSel_inputBox.text
+                    var st_day = startDay_InputBox.text
+                    var ed_day = endDay_InputBox.text
+
+                    if(parentTask == '未選擇'){
+                        var parentTaskID = 0
+                        }
+                    var deltaTime = checkDetaTime(st_day,ed_day)
+                    if( deltaTime >= 0){
+                       // console.log('1111111');
+                        $.post("/addNewTaskToDB", {   //runAllAutoEvents
+                                'proj_id':parseInt(projectSearchID),
+                                'name':taskName,
+                                'task_desc':taskDesc,
+                                'task_type':taskType,
+                                'user_name':user_name,
+                                'parent_task':parentTaskID,
+                                'st_day':st_day,
+                                'ed_day':ed_day,
+
+                                }, function(data) {
+                                        console.log(data)
+                                    var errMsg = data[0]
+                                 if(errMsg == 'task existed'){
+                                     
+                                        errMsgBox.text = taskName  + ' 名稱已存在。' 
+                                     
+                                 }else if(errMsg == 'add task success'){
+                                     
+                                        errMsgBox.text = taskName  + '新增完成' 
+                                 }
+
+                                })        
+                   }else{
+                        errMsgBox.text = '結束時間比開始時間早，請修正日期'
+                    };   
+                        /*
+ 
+                                */
+            
+
+                      })
+    
+                function addTaskToDB(){
+                    
+     
+                    
+                    
+                }
+    
+        return addTaskWin
+    
+};
+    
+    
+    
+//task List Win
+    
+function buildTaskListWin(parent,x,y,w,h,proj_id){
+    console.log('buildTaskListWin')
+    parent.removeChild(parent.getChildByName("taskList_container"))
+    var allTasksData = JSON.parse(window.localStorage.getItem("allTasksData"));
+    var userNameList = JSON.parse(window.localStorage.getItem("userNameList"));
+    var taskTypeData = JSON.parse(window.localStorage.getItem("taskTypeData"));
+    
+    var taskTypeList = []
+    for (var i =0; i<taskTypeData.length;i++ ){
+        taskTypeList.push(taskTypeData[i][1])
+        };
+    
+    var countPrePage = 15
+    
+    var SelTaskList = allTasksData.filter(function(item, index, array){
+              return item[2] == proj_id;      
+            }); 
+    
+    var allTasksCount = SelTaskList.length
+
+
+    var totalProjPages = Math.ceil(allTasksCount / countPrePage) 
+    
+    
+    
+   // console.log(SelTaskList,allTasksCount)
+    //console.log(parent)
+
+    // 專案選擇 底層可移動視窗
+    var taskListWin = new moveAbleWinBlock(uiBaseContainer,x,y,w,h,'Task List',20,20,14,'0xffffff','taskList_container',1,'0x333333',2,'0x333333',1,1,'0x556666',daysApp,screenW,screenH,true)
+        taskListWin.name = 'taskList_container'
+
+        taskListWin.interactive = true;   // BTN
+    var taskListWinW = 740
+    var taskListWinH = 900
+    var taskListWin_listArea = new buildSimpletBlock(taskListWin,5,80,taskListWinW-20,470,1,'0x444444',1)
+        taskListWin_listArea.name = 'taskListWin_listArea'
+
+    
+    
+    
+    //task edit block start
+    var taskEditWin_listArea = new buildSimpletBlock(taskListWin,5,555,taskListWinW-20,340,1,'0x222222',1)
+    
+        taskEditWin_listArea.name = 'taskEditWin_listArea'
+      
+    var taskSearchID_InputBox = new inputBoxWithLabel(taskEditWin_listArea,450,10,70,50,3,'Task ID:','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        taskSearchID_InputBox.name = 'taskSearchID_InputBox'
+
+        taskSearchID_InputBox.text = '0'
+        taskSearchID_InputBox.disabled = true    
+            
+    var parentProjSearchID_InputBox = new inputBoxWithLabel(taskEditWin_listArea,580,10,70,50,3,'專案 ID:','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        parentProjSearchID_InputBox.name = 'parentProjSearchID_InputBox'
+
+        parentProjSearchID_InputBox.text = proj_id
+        parentProjSearchID_InputBox.disabled = true 
+    
+    
+
+
+    
+    var taskName_InputBox = new inputBoxWithLabel(taskEditWin_listArea,10,10,80,330,3,'任務名稱 :','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x777777')
+        taskName_InputBox.name = 'taskName_InputBox'
+        taskName_InputBox.disabled = true   
+        taskName_InputBox.text = ''
+    
+    var taskDesc_InputBox = new inputBoxWithLabel(taskEditWin_listArea,10,40,80,610,3,'任務說明 :','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        taskDesc_InputBox.text = ''
+        taskDesc_InputBox.name = 'taskDesc_InputBox'
+        taskDesc_InputBox.disabled = true   
+
+    var taskType_InputBox = new inputBoxWithLabel(taskEditWin_listArea,10,70,80,200,3,'任務類型 :','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        taskType_InputBox.text = ''
+        taskType_InputBox.disabled = true   
+        taskType_InputBox.name = 'taskType_InputBox'
+
+            
+        taskType_InputBox.interactive = true;
+        taskType_InputBox.buttonMode = true;
+    
+
+        taskType_InputBox.on('pointerover', function(){this.alpha=0.5;})
+                       .on('pointerout', function(){this.alpha=1;})
+                        .on('mousedown',function(){this.alpha=0.5;
+                                var openDaysSelWin  = new buildSelectionWin(uiBaseContainer,taskListWin.x,100,600,800,'任務類型',taskTypeList,taskType_InputBox,false)
+
+                                                  // buildSelectionWin(uiBaseContainer,x-600,50,600,800,'選擇主美',userNameList,artistSel_inputBox)
+                                                  })
+                        .on('pointerup', function(){this.alpha=1;})
+
+      
+    
+    
+    
+    
+    var parentTask_InputBox = new inputBoxWithLabel(taskEditWin_listArea,310,70,80,310,3,'上層任務 :','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        parentTask_InputBox.text = ''
+        parentTask_InputBox.disabled = true   
+        parentTask_InputBox.name = 'parentTask_InputBox'
+
+    
+    
+    
+    var taskUser_InputBox = new inputBoxWithLabel(taskEditWin_listArea,10,100,80,200,3,'執行人員 :','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        taskUser_InputBox.text = '123'
+        taskUser_InputBox.disabled = true   
+        taskUser_InputBox.name = 'taskUser_InputBox'
+
+        taskUser_InputBox.interactive = true;
+        taskUser_InputBox.buttonMode = true;
+    
+        taskUser_InputBox.on('pointerover', function(){this.alpha=0.5;})
+                            .on('pointerout', function(){this.alpha=1;})
+                            .on('mousedown',function(){this.alpha=0.5;
+                            var openDaysSelWin  = new buildSelectionWin(uiBaseContainer,taskListWin.x,100,600,800,'人員選擇',userNameList,taskUser_InputBox,true)
+
+                                              // buildSelectionWin(uiBaseContainer,x-600,50,600,800,'選擇主美',userNameList,artistSel_inputBox)
+                                              })
+                            .on('pointerup', function(){this.alpha=1;})
+
+
+    
+    var taskProcess_InputBox = new inputBoxWithLabel(taskEditWin_listArea,310,100,80,200,3,'目前進度 :','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        taskProcess_InputBox.text = ''
+        taskProcess_InputBox.disabled = true   
+        taskProcess_InputBox.name = 'taskProcess_InputBox'
+
+
+    
+    var startDay_InputBox = new inputBoxWithLabel(taskEditWin_listArea,10,130,80,200,3,'起始日期 :','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        startDay_InputBox.text = ''//selYear + " 年 "+ selMonth + ' 月 ' + selDay + ' 日 '
+        startDay_InputBox.disabled = true
+        startDay_InputBox.name = 'startDay_InputBox'
+
+    
+    
+    
+    var endDay_InputBox = new inputBoxWithLabel(taskEditWin_listArea,310,130,80,200,3,'結束日期 :','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x555555')
+        endDay_InputBox.text = ''//selYear + " 年 "+ selMonth + ' 月 ' + selDay + ' 日 '
+        endDay_InputBox.disabled = true
+        endDay_InputBox.name = 'endDay_InputBox'
+
+    
+        startDay_InputBox.interactive = true;
+        startDay_InputBox.buttonMode = true;
+        startDay_InputBox.on('pointerover', function(){this.alpha=0.5;})
+                       .on('pointerout', function(){this.alpha=1;})
+                        .on('mousedown',function(){this.alpha=0.5;
+                                                   var posX = x -470
+                                                    var posY = y + 10
+
+                                                    var openDaysSelWin = new buildDaysSelWin(uiBaseContainer,posX, posY, 600,800,startDay_InputBox)
+                                                  })
+                        .on('pointerup', function(){this.alpha=1;})
+
+
+        endDay_InputBox.interactive = true;
+        endDay_InputBox.buttonMode = true;
+        endDay_InputBox.on('pointerover', function(){this.alpha=0.5;})
+                       .on('pointerout', function(){this.alpha=1;})
+                        .on('mousedown',function(){this.alpha=0.5;
+                                                  var posX = x -470
+                                                    var posY = y + 10
+
+                                                   var openDaysSelWin = new buildDaysSelWin(uiBaseContainer,posX, posY, 600,800,endDay_InputBox)
+
+                                          })
+                        .on('pointerup', function(){this.alpha=1;})
+
+    
+    
+    
+    var taskReferenceURL_InputBox = new inputBoxWithLabel(taskEditWin_listArea,10,160,80,610,3,'參考資料 :','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x777777')
+        taskReferenceURL_InputBox.text = ''
+        taskReferenceURL_InputBox.name = 'taskReferenceURL_InputBox'
+        taskReferenceURL_InputBox.disabled = true
+    
+    var taskOutputURL_InputBox = new inputBoxWithLabel(taskEditWin_listArea,10,190,80,610,3,'輸出位置 :','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x777777')
+        taskOutputURL_InputBox.text = ''
+        taskOutputURL_InputBox.name = 'taskOutputURL_InputBox'
+        taskOutputURL_InputBox.disabled = true
+
+    var taskExt1_InputBox = new inputBoxWithLabel(taskEditWin_listArea,10,220,80,610,3,'備註說明 :','xxxx',11,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x777777')
+        taskExt1_InputBox.text = '備註說明'
+        taskExt1_InputBox.name = 'taskExt1_InputBox'
+        taskExt1_InputBox.disabled = true
+
+
+    var taskEditBtn = new buildBtnScaleB(taskEditWin_listArea,10,300,100,30,'編 輯','primary')
+    taskEditBtn.name = 'taskEditBtn'
+       // taskEditBtn.tint = '0x007bff'
+ 
+    
+    
+    // 可編輯inputBox list
+    var allTaskWriteInputList = [taskName_InputBox,taskDesc_InputBox,taskProcess_InputBox,taskReferenceURL_InputBox,taskOutputURL_InputBox,taskExt1_InputBox];
+       
+    // 可選擇inputBox list
+    var allTaskEditBtnList = [taskName_InputBox,taskDesc_InputBox,taskType_InputBox,parentTask_InputBox,taskUser_InputBox,taskProcess_InputBox,startDay_InputBox,endDay_InputBox,taskReferenceURL_InputBox,taskOutputURL_InputBox,taskExt1_InputBox];
+
+
+
+    
+
+    
+    var taskConfirmEditBtn = new buildBtnScaleB(taskEditWin_listArea,130,300,100,30,'確認編輯','secondary')
+       // taskEditBtn.tint = '0x007bff'
+        taskConfirmEditBtn.name = 'taskConfirmEditBtn'
+
+        taskConfirmEditBtn.alpha = 0.2
+        taskConfirmEditBtn.interactive = false;
+        taskConfirmEditBtn.on('mousedown', function(){
+              var deltaTime = checkDetaTime(startDay_InputBox.text,endDay_InputBox.text)
+                    if( deltaTime >= 0){
+                       // console.log('1111111');
+    
+                                    
+                                    $.post("/editTaskConfirm", {   //runAllAutoEvents
+                                        'id':parseInt(taskSearchID_InputBox.text),
+                                        'proj_id':parseInt(parentProjSearchID_InputBox.text),
+                                        'name':taskName_InputBox.text,
+                                        'parent_task':parentTask_InputBox.text,
+                                        'user_name':taskUser_InputBox.text,
+                                        'st_day':startDay_InputBox.text,
+                                        'ed_day':endDay_InputBox.text,
+                                        'ref':taskReferenceURL_InputBox.text,
+                                        'output':taskOutputURL_InputBox.text,
+                                        'task_desc':taskDesc_InputBox.text,
+                                        'task_type':taskType_InputBox.text,
+                                        'progress_desc':taskProcess_InputBox.text,
+                                        'progress_percent':0,//taskProcess_InputBox.text,
+                                        'task_ext1':taskExt1_InputBox.text,
+
+                                      //  'task_desc':taskDesc,
+                                       // 'task_type':taskType,
+                                     //   'user_name':user_name,
+                                      //  'parent_task':parentTaskID,
+                                       // 'st_day':st_day,
+                                      //  'ed_day':ed_day,
+
+                                    }, function(data) {
+                                        console.log(data)
+                                        var selTaskListName ='task_'+ data[1][13]
+                                        var selTaskList = taskListWin_listArea.getChildByName(selTaskListName)
+                                       // console.log(selTaskList)
+                                        //console.log(taskListWin_listArea)
+                                        
+                                        selTaskList.getChildByName('taskName_inputBox').text = data[1][1]
+                                        selTaskList.getChildByName('user_inputBox').text = data[1][3]
+                                        selTaskList.getChildByName('stDay_inputBox').text = data[1][4]
+                                        selTaskList.getChildByName('edDay_inputBox').text = data[1][5]
+                                        selTaskList.getChildByName('taskType_inputBox').text = data[1][9]
+
+                                        selTaskList.getChildByName('taskProgress_inputBox').text = parseInt(data[1][11]) +' %'
+                                        
+                                        getTaskDataFromDB()
+                                        
+                                        errMsgBox.text = data[1][1] + '  已編輯完成'
+
+
+                                    }) ;
+                        
+                        
+                    }else{
+                        errMsgBox.text = '結束時間比開始時間早，請修正日期'
+                    };   
+                
+
+
+            
+
+                }) ;   
+    
+    
+    
+    
+            
+    var taskDelBtn = new buildBtnScaleB(taskEditWin_listArea,610,300,100,30,'刪 除','danger')
+        taskDelBtn.name = 'taskDelBtn'
+        taskDelBtn.alpha = 0.2
+        taskDelBtn.interactive = false;
+
+       // taskEditBtn.tint = '0x007bff'
+        taskDelBtn.on('mousedown', function(){
+
+                                    })               
+    
+    //task edit block end
+    
+    //定義編輯BTN
+                   
+        taskEditBtn.on('mousedown', function(){
+            startEditTask()
+            
+            
+            if(taskSearchID_InputBox.text == '0'){
+                console.log('未選擇task')
+                errMsgBox.text = '未選擇任務，請先於列表中點選任務'
+
+            }else{
+                taskConfirmEditBtn.alpha = 1
+                taskConfirmEditBtn.interactive = true;
+                
+            }
+            
+
+            
+        });
+    
+    disableEditTask() // 初始化 taskEditWin , all input disabled
+    
+    
+    function disableEditTask(){
+        
+        taskConfirmEditBtn.alpha = 0.2
+        taskConfirmEditBtn.interactive = false;
+        taskDelBtn.alpha = 0.2
+        taskDelBtn.interactive = false;
+        
+        for(var i in allTaskWriteInputList){
+           // console.log(allTaskWriteInputList[i])
+            allTaskWriteInputList[i].disabled = true
+        }
+        for(var j in allTaskEditBtnList){
+            //console.log(allTaskEditBtnList[j])
+
+            allTaskEditBtnList[j].interactive = false;
+        }
+       //console.log(taskName_InputBox)  
+    };
+    
+    
+        
+    
+    function startEditTask(){
+        
+        console.log('startEditTask')
+
+                
+        for(var i in allTaskWriteInputList){
+           // console.log(allTaskWriteInputList[i])
+            allTaskWriteInputList[i].disabled = false
+        };
+        for( var j in allTaskEditBtnList){
+            allTaskEditBtnList[j].interactive = true;
+          //  console.log(allTaskEditBtnList[j])
+        };
+
+    };
+    
+    
+    
+    var pageCtrGrpA =  new pageCtrBtnGrp(taskListWin,0,40,w*1.225,40,'pageCtrGrpA_container','頁 數 選 擇 :','0xaaffaa','0x333333','0x333333',8,'0xff7878',50,'0xaaaaaa','0x333333',11,0.8,1,totalProjPages);
+
+    var pageCtrBoxBG = pageCtrGrpA[0];
+    var pageCtnL = pageCtrGrpA[1];
+    var pageCtnR = pageCtrGrpA[2];
+    
+    pageCtnL.on('mousedown', function(){
+                           // pageCtnLIconOL.alpha =1;
+                            this.alpha = 1
+
+                            var currentPageContNum =parseInt(pageCtrGrpA[3].text)
+                            if( currentPageContNum == 1){var newPageNum = 1}else{
+                                var newPageNum =  parseInt(pageCtrGrpA[3].text)-1;
+                                pageCtrGrpA[3].text = newPageNum
+                                };
+                                var fromIndex = (pageCtrGrpA[3].text -1) *countPrePage
+
+                                var toIndex = ( pageCtrGrpA[3].text ) *countPrePage
+                                var taskList = new buildTaskList(taskListWin_listArea,SelTaskList,fromIndex,toIndex)
+
+                               // callListFromDataIndex(fromIndex,toIndex,previewType)
+                                console.log(fromIndex,toIndex)
+                            });
+
+    pageCtnR.on('mousedown', function(){
+                                       //     pageCtnLIconOR.alpha =1;
+                                            this.alpha = 1
+
+                                          //  console.log('press down btn',currentCountInputBox.text,totalCountInputBox.text)
+                                            var currentPageContNum = parseInt(pageCtrGrpA[3].text)
+                                            var maxPageNume = totalProjPages
+                                            if( currentPageContNum == maxPageNume){var newPageNum = totalProjPages }else{
+                                                var newPageNum =  parseInt(pageCtrGrpA[3].text) + 1;
+                                                pageCtrGrpA[3].text = newPageNum
+                                                    };
+                                                var fromIndex = (pageCtrGrpA[3].text -1) *countPrePage
+                                                
+                                                
+                                                
+                                                var toIndex = ( pageCtrGrpA[3].text ) *countPrePage
+                                                if( toIndex > allTasksCount ){ toIndex = allTasksCount }
+                                            var taskList = new buildTaskList(taskListWin_listArea,SelTaskList,fromIndex,toIndex)
+                                                console.log(fromIndex,toIndex)
+
+                                            });
+    
+    
+    
+    
+    
+    
+    if( allTasksCount <= countPrePage  ){
+        
+        var toIndex = allTasksCount
+    }else {
+        
+        var toIndex = countPrePage
+    }
+
+    var taskList = new buildTaskList(taskListWin_listArea,SelTaskList,0,toIndex)
+   
+    
+};   
+    
+    
+function buildTaskList(parent,filter_taskData,fromIndex,toIndex){
+
+   // console.log(taskListWin_listArea)  
+
+   // console.log(fromIndex,toIndex)  
+    var childCount = parent.children.length
+    for(var i = 0; i<childCount ;i++){
+            parent.removeChild(parent.getChildByName("taskListBlock"))   
+            
+    }
+
+    var taskEditWin_listArea = parent.parent.getChildByName('taskEditWin_listArea')
+    console.log(taskEditWin_listArea)
+    
+    var taskSearchID_InputBox = taskEditWin_listArea.getChildByName('taskSearchID_InputBox')
+    var parentProjSearchID_InputBox = taskEditWin_listArea.getChildByName('parentProjSearchID_InputBox')
+
+    var taskName_InputBox = taskEditWin_listArea.getChildByName('taskName_InputBox')
+    var taskDesc_InputBox = taskEditWin_listArea.getChildByName('taskDesc_InputBox')
+    var taskType_InputBox = taskEditWin_listArea.getChildByName('taskType_InputBox')
+    var parentTask_InputBox = taskEditWin_listArea.getChildByName('parentTask_InputBox')
+    var taskUser_InputBox = taskEditWin_listArea.getChildByName('taskUser_InputBox')
+    var taskProcess_InputBox = taskEditWin_listArea.getChildByName('taskProcess_InputBox')
+    var startDay_InputBox = taskEditWin_listArea.getChildByName('startDay_InputBox')
+    var endDay_InputBox = taskEditWin_listArea.getChildByName('endDay_InputBox')
+    var taskReferenceURL_InputBox = taskEditWin_listArea.getChildByName('taskReferenceURL_InputBox')
+    var taskOutputURL_InputBox = taskEditWin_listArea.getChildByName('taskOutputURL_InputBox')
+    var taskExt1_InputBox = taskEditWin_listArea.getChildByName('taskExt1_InputBox')
+
+    // 可編輯inputBox list
+    var allTaskWriteInputList = [taskName_InputBox,taskDesc_InputBox,taskProcess_InputBox,taskReferenceURL_InputBox,taskOutputURL_InputBox,taskExt1_InputBox];
+       
+    // 可選擇inputBox list
+    var allTaskEditBtnList = [taskName_InputBox,taskDesc_InputBox,taskType_InputBox,parentTask_InputBox,taskUser_InputBox,taskProcess_InputBox,startDay_InputBox,endDay_InputBox,taskReferenceURL_InputBox,taskOutputURL_InputBox,taskExt1_InputBox];
+    
+    
+       // console.log(taskReferenceURL_InputBox)
+
+    for(i = fromIndex ;i < toIndex  ;i++){
+        var idNum = i +1
+        var taskName = filter_taskData[i][1]
+        var taskUser = filter_taskData[i][4]
+        var stDay = filter_taskData[i][5]
+        var edDay = filter_taskData[i][6]
+        var type = filter_taskData[i][11]
+        if(filter_taskData[i][13] == null){
+          // console.log('1111')
+            var progressPercent =0
+        }else{// console.log('2222')
+            var progressPercent = parseInt(filter_taskData[i][13])
+             
+             }
+       
+        
+
+        var posX = 5
+        var posY =  (Math.ceil((i-fromIndex)))*(30) +3//Math.floor((toIndex-i)/ numCol) *(iconWidth+20) +10
+       // console.log(filter_taskData[i])
+        var taskListBlock = new buildBasicLineSelectBlock(parent,posX,posY,550,28,9,'0xffffff','taskListBlock','0x444444','0x444444','0x222222',1,'0x222222',idNum,taskName,taskUser,'taskDesc',stDay,edDay,type,progressPercent,1)
+        
+        taskListBlock.task_searchID = filter_taskData[i][0]
+        taskListBlock.taskName = filter_taskData[i][1]
+        taskListBlock.proj_searchID = filter_taskData[i][2]
+
+        taskListBlock.parentTask = filter_taskData[i][3]
+        taskListBlock.taskUser = filter_taskData[i][4]
+
+        taskListBlock.stDay = filter_taskData[i][5]
+        taskListBlock.edDay = filter_taskData[i][6]
+        
+        taskListBlock.taskRefURL = filter_taskData[i][7]
+        taskListBlock.taskOutputURL = filter_taskData[i][8]
+        taskListBlock.desc = filter_taskData[i][9]
+        taskListBlock.previewImageURL = filter_taskData[i][10]
+
+        taskListBlock.taskType = filter_taskData[i][11]
+        
+        
+        taskListBlock.taskprogressDesc = filter_taskData[i][12]
+        taskListBlock.taskprogresspercent = filter_taskData[i][13]
+
+        taskListBlock.task_ex1 = filter_taskData[i][14]
+        taskListBlock.task_ex2 = filter_taskData[i][15]
+        taskListBlock.task_publishEvent = filter_taskData[i][16]
+        taskListBlock.task_publishURL = filter_taskData[i][17]
+        taskListBlock.task_publishType = filter_taskData[i][18]
+        taskListBlock.task_ranking = filter_taskData[i][19]
+        taskListBlock.task_tag = filter_taskData[i][20]
+
+        taskListBlock.name = 'task_'+taskListBlock.task_searchID
+
+        
+        taskListBlock.on('mousedown', function(){
+              //  console.log(this.name)
+                parentProjSearchID_InputBox.text = this.proj_searchID
+                taskSearchID_InputBox.text = this.task_searchID
+                taskName_InputBox.text = this.taskName
+                taskDesc_InputBox.text = this.desc
+                taskType_InputBox.text = this.taskType
+                parentTask_InputBox.text = this.parentTask
+              
+                taskUser_InputBox.text = this.taskUser
+
+                taskProcess_InputBox.text = this.taskprogressDesc
+                startDay_InputBox.text = this.stDay
+                endDay_InputBox.text = this.edDay
+                taskReferenceURL_InputBox.text = this.taskRefURL
+                taskOutputURL_InputBox.text = this.taskOutputURL
+                taskExt1_InputBox.text = this.task_ex1
+            
+              //  var selListBlock = parent.getChildByName(this.name)
+            
+              //  console.log(selListBlock.children)
+            
+            
+                disableEditTask()
+                
+
+        });
+        
+        
+        function disableEditTask(){
+
+        var taskConfirmEditBtn = taskEditWin_listArea.getChildByName('taskConfirmEditBtn')
+        var taskDelBtn = taskEditWin_listArea.getChildByName('taskDelBtn')
+        
+        taskConfirmEditBtn.alpha = 0.2
+        taskConfirmEditBtn.interactive = false;
+        taskDelBtn.alpha = 0.2
+        taskDelBtn.interactive = false;
+        
+        
+        for(var i in allTaskWriteInputList){
+           // console.log(allTaskWriteInputList[i])
+            allTaskWriteInputList[i].disabled = true
+        }
+        for(var j in allTaskEditBtnList){
+            //console.log(allTaskEditBtnList[j])
+
+            allTaskEditBtnList[j].interactive = false;
+        }
+       //console.log(taskName_InputBox)  
+        };
+    
+
+
+    };
+
+
+};   
+        
+    
+    
+
+
+
+    
+function checkProjToIndexNum(parent,allProjectList,fromIndexNum){
+    
+    var currentSel_previewType = parent.previewType
+    var currentSel_sortFilter = parent.sortFilter
+    var currentSel_projType = parent.projType
+
+    
+    if( currentSel_projType == 'slot game'){
+        var filterProjList = allProjectList.filter(function(item, index, array){
+                  return item[8] == 'slot game';      
+                });   
+    }else if(currentSel_projType == '未指定'){
+        var filterProjList =  allProjectList        
+    }else if(currentSel_projType == 'pop game'){
+        var filterProjList = allProjectList.filter(function(item, index, array){
+                  return item[8] == 'pop game';    
+                });       
+    }else if(currentSel_projType == 'fishing'){
+        var filterProjList = allProjectList.filter(function(item, index, array){
+                  return item[8] == 'fishing';     
+                });       
+    }else if(currentSel_projType == 'CF'){
+        var filterProjList = allProjectList.filter(function(item, index, array){
+                  return item[8] == 'CF';       
+                });       
+    }else{
+        
+        var filterProjList =  allProjectList 
+    };
+    
+    var maxNumPrePageArrey ={
+        "列表":15,
+        "大圖":9,
+        "小圖":16
+    };
+      
+    
+    if(currentSel_sortFilter == "字母"){
+        var sortfilterProjList = filterProjList.sort(function (a, b) {
+                return a[1] > b[1] ? 1 : -1;
+        });   
+    }else if(currentSel_sortFilter == "時間"){
+        var sortfilterProjList = filterProjList.sort(function (a, b) {
+                return a[0] < b[0] ? 1 : -1;
+        });       
+    }else if(currentSel_sortFilter == "My"){
+        var sortfilterProjList = filterProjList.sort(function (a, b) {
+                return a[0] < b[0] ? 1 : -1;
+        });      
+        
+        
+    }
+    
+    
+    
+    
+    
+   // var sortList_byTime = filterProjList.sort(function (a, b) {
+   //  return a[0]< b[0] ? 1 : -1;
+   // });
+    
+    var maxNumPrePage = maxNumPrePageArrey[currentSel_previewType]
+    
+   // if(previewType =="大圖"){projectSelectWin.toIndex = 9
+    //    }else if(previewType =="小圖"){
+    //        projectSelectWin.toIndex = 15       
+    //    }else if(previewType =="列表"){
+     //       projectSelectWin.toIndex = 20      
+    //    };
+    
+    var projsCount = filterProjList.length
+    if((fromIndexNum + maxNumPrePage) < projsCount ){
+        var toIndexNum = fromIndexNum + maxNumPrePage
+    }else{
+         
+        var toIndexNum = projsCount
+    }
+   // console.log(fromIndexNum,maxNumPrePage,projsCount,toIndexNum)
+  //  console.log(sortfilterProjList)
+
+    //if( projectSelectWin.toIndex  > projsCount ){ projectSelectWin.toIndex  = projsCount }
+    
+    return [toIndexNum,sortfilterProjList]
+    
+}
+    
+function getProjList(parent,x,y,w,h,projDataList,previewType,projType_filter,sortFilter,fromIndex,toIndex){
+    
+   // var winWidth = 800
+   // var winHeight = 900
+    parent.removeChild(parent.getChildByName("ProjectSelectWin_listArea"))
+
+    var ProjectSelectWin_listArea = new buildSimpletBlock(parent,10,210,w-20,h-220,1,'0x444444',1)
+    ProjectSelectWin_listArea.name = 'ProjectSelectWin_listArea'
+    
+    
+        ProjectSelectWin_listArea.interactive = false;
+        ProjectSelectWin_listArea.buttonMode = false;
+   // console.log(projDataList)
+    if( projType_filter == 'slot game'){
+        var filterProjList = projDataList.filter(function(item, index, array){
+                  return item[8] == 'slot game';     
+                });   
+    }else if(projType_filter == '未指定'){
+        var filterProjList =  projDataList        
+    }else if(projType_filter == 'pop game'){
+        var filterProjList = projDataList.filter(function(item, index, array){
+                  return item[8] == 'pop game';      
+                });       
+    }else if(projType_filter == 'fishing'){
+        var filterProjList = projDataList.filter(function(item, index, array){
+                  return item[8] == 'fishing';      
+                });       
+    }else if(projType_filter == 'CF'){
+        var filterProjList = projDataList.filter(function(item, index, array){
+                  return item[8] == 'CF';      
+                });       
+    }else{
+        
+        var filterProjList =  projDataList 
+    };
+    
+    //console.log(filterProjList)
+    var projsCount = filterProjList.length
+
+    
+    if(previewType == '大圖'){
+        var countPrePage = 9  
+        var numCol = 3
+        var iconWidth = 200
+        var iconHeight = 200
+        var fontSize = 14
+    }else if(previewType == '小圖'){
+        var countPrePage = 16 
+        var numCol = 4
+        var iconWidth = 150
+        var iconHeight = 150
+
+        var fontSize = 12
+
+
+    }else if(previewType == '列表'){
+        var countPrePage = 15
+        var numCol = 1
+        var iconWidth = 650
+        var iconHeight = 40
+
+        var fontSize = 12
+             }
+    console.log(projsCount,countPrePage)
+
+    var totalProjPages = Math.ceil(projsCount / countPrePage)
+    
+    var pageCtrGrpA =  new pageCtrBtnGrp(ProjectSelectWin_listArea,0,y-35,w*1.215,40,'pageCtrGrpA_container','頁 數 選 擇 :','0xaaffaa','0x333333','0x333333',8,'0xff7878',50,'0xaaaaaa','0x333333',11,0.8,1,totalProjPages);
+
+        var pageCtrBoxBG = pageCtrGrpA[0];
+        var pageCtnL = pageCtrGrpA[1];
+        var pageCtnR = pageCtrGrpA[2];
+    
+
+
+    if( toIndex > projsCount ){ toIndex = projsCount }
+    
+    callListFromDataIndex(fromIndex,toIndex,previewType)
+    
+
+
+   
+    
+        pageCtnL.on('mousedown', function(){
+                           // pageCtnLIconOL.alpha =1;
+                            this.alpha = 1
+
+                            var currentPageContNum =parseInt(pageCtrGrpA[3].text)
+                            if( currentPageContNum == 1){var newPageNum = 1}else{
+                                var newPageNum =  parseInt(pageCtrGrpA[3].text)-1;
+                                pageCtrGrpA[3].text = newPageNum
+                                };
+                                var fromIndex = (pageCtrGrpA[3].text -1) *countPrePage
+
+                                var toIndex = ( pageCtrGrpA[3].text ) *countPrePage
+                                
+                                callListFromDataIndex(fromIndex,toIndex,previewType)
+                                console.log(fromIndex,toIndex)
+                            });
+
+       pageCtnR.on('mousedown', function(){
+                                       //     pageCtnLIconOR.alpha =1;
+                                            this.alpha = 1
+
+                                          //  console.log('press down btn',currentCountInputBox.text,totalCountInputBox.text)
+                                            var currentPageContNum = parseInt(pageCtrGrpA[3].text)
+                                            var maxPageNume = totalProjPages
+                                            if( currentPageContNum == maxPageNume){var newPageNum = totalProjPages }else{
+                                                var newPageNum =  parseInt(pageCtrGrpA[3].text) + 1;
+                                                pageCtrGrpA[3].text = newPageNum
+                                                    };
+                                                var fromIndex = (pageCtrGrpA[3].text -1) *countPrePage
+                                                
+                                                
+                                                
+                                                var toIndex = ( pageCtrGrpA[3].text ) *countPrePage
+                                                if( toIndex > projsCount ){ toIndex = projsCount }
+                                                callListFromDataIndex(fromIndex,toIndex,previewType)
+                                                console.log(fromIndex,toIndex)
+
+                                            });
+
+    
+        function callListFromDataIndex(fromIndex,toIndex,previewType){
+            ProjectSelectWin_listArea.removeChild(ProjectSelectWin_listArea.getChildByName("projectListContainer"))
+            var projectListContainer = new PIXI.Container()
+                projectListContainer.name = 'projectListContainer';
+                ProjectSelectWin_listArea.addChild(projectListContainer)
+                console.log(fromIndex,toIndex)
+            if(previewType ==  '列表'){  // 建立 列表 選單
+                
+                 for(var i = fromIndex; i<toIndex; i++){
+                    var posX = (i% numCol) * (iconWidth+20) +10
+                    var posY =  (Math.ceil((toIndex-i)/ numCol)-1)*(iconHeight+5) +5//Math.floor((toIndex-i)/ numCol) *(iconWidth+20) +10
+                    var itemEN = filterProjList[i][1]
+                    var itemCH = filterProjList[i][2]
+                    var projType = filterProjList[i][8]
+                    var searchID = filterProjList[i][0]
+                    
+                    var addNewImageSelBlock = new buildProjListPreviewSelectBlock(projectListContainer,posX,posY,iconWidth,iconHeight,fontSize,'0xeeeeee','0x222222',1,'0x222222','imageUrl',i,itemEN,itemCH,'itemDesc',projType,'projProcess',1) //buildProjListPreviewSelectBlock(parent,x,y,w,h,labelFontSize,labelFontColor,blockFillColor,blockBorderWidth,blockBorderColor,imageUrl,searchID,itemEN,itemCH,itemDesc,projType,projProcess,blockScale){
+   
+
+                };
+
+                
+                
+                
+            }else{  // 建立 大圖/小圖 選單
+                for(var i = fromIndex; i<toIndex; i++){
+                    var posX = (i% numCol) * (iconWidth+20) +10
+                    var posY =  (Math.ceil((toIndex-i)/ numCol)-1)*(iconHeight+20) +10//Math.floor((toIndex-i)/ numCol) *(iconWidth+20) +10
+                    var itemEN = filterProjList[i][1]
+                    var itemCH = filterProjList[i][2]
+                    var projType = filterProjList[i][8]
+                    var searchID = filterProjList[i][0]
+                    var addNewImageSelBlock = new buildProjImagePreviewSelectBlock(projectListContainer,posX,posY,iconWidth,iconHeight,fontSize,'0x222222','0xeeeeee',1,'0xeeeeee','imageUrl',i,itemEN,itemCH,'itemDesc',projType,'projProcess',1)  
+                    addNewImageSelBlock.searchID = searchID
+                    addNewImageSelBlock.itemEN = itemEN
+                    addNewImageSelBlock.on('mousedown', clickProjIcon)
+                };
+
+            };
+            
+            
+        }
+    
+};
+    
+
+// 點選專案圖示    
+function clickProjIcon(){
+    
+   // console.log('select project',this.searchID)
+    
+    var projEditwinW = 300
+    var openProjectEditWin  =  new buildProjectEditWin(uiBaseContainer,870, 35,projEditwinW,screenH-100,this.searchID)
+
+    var taskListWinW = 730
+    var taskListWinH = 900
+    var openTaskListWin  =  new buildTaskListWin(uiBaseContainer,1180, 35,taskListWinW,taskListWinH,this.searchID)
+
+
+  //  taskListWin_listArea.name = 'taskListWin_listArea'
+    
+    
+
+
+    
+
+    
+    
+    
+    
+    
+    
+};
+    
+    
+//新增專案視窗
+function buildProjectAddWin(parent,x,y,w,h){
+    console.log('add new project')
+    //var userNameList = JSON.parse(window.localStorage.getItem("userNameList"));
+    var chiefArtistList = JSON.parse(window.localStorage.getItem("chiefArtistList"));
+
+    var imList = JSON.parse(window.localStorage.getItem("imList"));
+    var designerList = JSON.parse(window.localStorage.getItem("designerList"));
+    var projectTypeList = JSON.parse(window.localStorage.getItem("projectTypeList"));
+
+   // var deptData = JSON.parse(window.localStorage.getItem("deptData"));
+    
+    
+    parent.removeChild(parent.getChildByName("projectAddWin_container"))
+
+    var projectAddWin = new moveAbleWinBlock(uiBaseContainer,400,20,400,550,'新 增 專 案',20,20,14,'0xffffff','projectAddWin_container',1,'0x555555',5,'0x777777',1,1,'0x555555',daysApp,screenW,screenH,true)
+        projectAddWin.name = 'projectAddWin_container'
+    
+    
+    var newProjEN_name_InputBox = new inputBoxWithLabel(projectAddWin,20,50,100,250,3,'英文名稱:','xxxx',12,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x333333')
+        newProjEN_name_InputBox.text = 'new_project_name'
+    
+    var newProjCH_name_InputBox = new inputBoxWithLabel(projectAddWin,20,90,100,250,3,'中文名稱:','xxxx',12,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x333333')
+        newProjCH_name_InputBox.text = '新增專案中文名稱' 
+    
+    var dayDate = new Date()
+    
+    var selYear = dayDate.getFullYear()
+    var selMonth = dayDate.getMonth() +1
+    var selDay = dayDate.getDate() 
+    
+    var startDay_InputBox = new inputBoxWithLabel(projectAddWin,20,130,100,250,3,'起始日期:','xxxx',12,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x333333')
+        startDay_InputBox.text = selYear + " 年 "+ selMonth + ' 月 ' + selDay + ' 日 '
+        startDay_InputBox.disabled = true
+    
+    var endDay_InputBox = new inputBoxWithLabel(projectAddWin,20,170,100,250,3,'結束日期:','xxxx',12,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x333333')
+        endDay_InputBox.text = selYear + " 年 "+ selMonth + ' 月 ' + selDay + ' 日 '
+        endDay_InputBox.disabled = true
+
+
+        startDay_InputBox.interactive = true;
+        startDay_InputBox.buttonMode = true;
+        startDay_InputBox.on('pointerover', function(){this.alpha=0.5;})
+                       .on('pointerout', function(){this.alpha=1;})
+                        .on('mousedown',function(){this.alpha=0.5;
+                                                   var posX = projectAddWin.x +projectAddWin.width
+                                                    var posY = projectAddWin.y
+
+                                                    var openDaysSelWin = new buildDaysSelWin(uiBaseContainer,posX, posY, 600,800,startDay_InputBox)
+                                                  })
+                        .on('pointerup', function(){this.alpha=1;})
+
+
+        endDay_InputBox.interactive = true;
+        endDay_InputBox.buttonMode = true;
+        endDay_InputBox.on('pointerover', function(){this.alpha=0.5;})
+                       .on('pointerout', function(){this.alpha=1;})
+                        .on('mousedown',function(){this.alpha=0.5;
+                                                  var posX = projectAddWin.x +projectAddWin.width
+                                                    var posY = projectAddWin.y
+
+                                                   var openDaysSelWin = new buildDaysSelWin(uiBaseContainer,posX, posY, 600,800,endDay_InputBox)
+
+                                          })
+                        .on('pointerup', function(){this.alpha=1;})
+
+    
+    
+    var chiefArtistSel_inputBox = new inputBoxWithLabel(projectAddWin,20,210,100,250,3,'主 美:','xxxx',12,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x333333')
+        chiefArtistSel_inputBox.text = "未選擇"
+        chiefArtistSel_inputBox.disabled = true
+
+        chiefArtistSel_inputBox.interactive = true;
+        chiefArtistSel_inputBox.buttonMode = true;
+        chiefArtistSel_inputBox.on('pointerover', function(){this.alpha=0.5;})
+                       .on('pointerout', function(){this.alpha=1;})
+                        .on('mousedown',function(){this.alpha=0.5;
+
+                                                   buildSelectionWin(uiBaseContainer,800,100,600,800,'選擇主美',chiefArtistList,chiefArtistSel_inputBox,false)
+                                                  })
+                        .on('pointerup', function(){this.alpha=1;})
+
+
+
+    
+    
+    
+    
+    var IMSel_inputBox = new inputBoxWithLabel(projectAddWin,20,250,100,250,3,'IM:','xxxx',12,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x333333')
+        IMSel_inputBox.text = "未選擇"
+        IMSel_inputBox.disabled = true
+        IMSel_inputBox.interactive = true;
+        IMSel_inputBox.buttonMode = true;
+
+        IMSel_inputBox.on('pointerover', function(){this.alpha=0.5;})
+                   .on('pointerout', function(){this.alpha=1;})
+                    .on('mousedown',function(){this.alpha=0.5;
+                                                buildSelectionWin(uiBaseContainer,800,100,600,800,'選擇IM',imList,IMSel_inputBox,false)
+
+                                              })
+                    .on('pointerup', function(){this.alpha=1;})
+
+    var desinerSel_inputBox = new inputBoxWithLabel(projectAddWin,20,290,100,250,3,'企 劃:','xxxx',12,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x333333')
+        desinerSel_inputBox.text = "未選擇"
+        desinerSel_inputBox.disabled = true
+        desinerSel_inputBox.interactive = true;
+        desinerSel_inputBox.buttonMode = true;
+
+        desinerSel_inputBox.on('pointerover', function(){this.alpha=0.5;})
+                   .on('pointerout', function(){this.alpha=1;})
+                    .on('mousedown',function(){this.alpha=0.5;
+                                              buildSelectionWin(uiBaseContainer,800,100,600,800,'選擇企劃',designerList,desinerSel_inputBox,false)
+                                              })
+                    .on('pointerup', function(){this.alpha=1;})   
+
+  
+    var projectTypeSel_inputBox = new inputBoxWithLabel(projectAddWin,20,330,100,250,3,'專案類型:','xxxx',12,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x333333')
+        projectTypeSel_inputBox.text = "未選擇"
+        projectTypeSel_inputBox.disabled = true
+        projectTypeSel_inputBox.interactive = true;
+        projectTypeSel_inputBox.buttonMode = true;
+
+        projectTypeSel_inputBox.on('pointerover', function(){this.alpha=0.5;})
+                   .on('pointerout', function(){this.alpha=1;})
+                    .on('mousedown',function(){this.alpha=0.5;
+                                              buildSelectionWin(uiBaseContainer,800,100,600,800,'選擇專案類型',projectTypeList,projectTypeSel_inputBox,false)
+                                              })
+                    .on('pointerup', function(){this.alpha=1;})   
+    
+    var newProjDesc_InputBox = new inputBoxWithLabel(projectAddWin,20,370,100,250,3,'專案描述:','xxxx',12,'0xffffff','0xcccccc',3,'0xffffff',0.1,'0x333333')
+        newProjDesc_InputBox.text = '專案描述' 
+    
+    
+    
+    
+    var createNewProjBtn = new buildBtnScaleA(projectAddWin,20,480,120,30,'新增專案','secondary outline')
+        createNewProjBtn.name = 'createNewProjBtn'
+        createNewProjBtn.on('mousedown', function(){
+                            console.log('press新增專案')
+                            var newProjEN_Name = newProjEN_name_InputBox.text
+                            var newProjCH_Name = newProjCH_name_InputBox.text
+                            var newProj_startDay = startDay_InputBox.text
+                            var newProj_endDay = endDay_InputBox.text
+                            var newProj_chiefArtist = chiefArtistSel_inputBox.text
+                            var newProj_IM = IMSel_inputBox.text
+                            var newProj_designer = desinerSel_inputBox.text
+                            var newProj_type = projectTypeSel_inputBox.text
+                            var newProj_desc = newProjDesc_InputBox.text
+                           // console.log(newProjEN_Name,newProjCH_Name,newProj_startDay,newProj_endDay,newProj_chiefArtist,newProj_IM,newProj_designer,newProj_type)
+
+                                       
+                                 
+                             $.post("/addNewProjectTODB", {
+                                    'newProjEN_Name': newProjEN_Name,
+                                    'newProjCH_Name': newProjCH_Name,
+                                    'newProj_startDay': newProj_startDay,
+                                    'newProj_endDay': newProj_endDay,
+                                    'newProj_chiefArtist': newProj_chiefArtist,
+                                    'newProj_IM': newProj_IM,
+                                    'newProj_designer': newProj_designer,
+                                    'newProj_type': newProj_type,
+                                    'newProj_desc': newProj_desc
+                                    },
+                                    function(data) {
+                                        console.log("feedback", data)
+                                 
+                                        var errMsg = data[0]
+                                        if(errMsg == 'the same name'){
+                                            console.log('asdsadsadsad')
+                                            errMsgBox.text = '已有同樣名稱專案，請改其他名稱'
+                                        }
+                   
+                                        })
+                            errMsgBox.text = '新增專案' + newProjEN_Name + "完成"
+                            });   
+
+    
+    
+    
+    
+};
+    
+ 
+
+    
+    
+    
+    
+    
+    
+    
+
+//新增帳號視窗    
+/*    
+    
+function buildUserAddWin(parent,x,y,w,h){
+    
+    var deptData = JSON.parse(window.localStorage.getItem("deptData"));
+    
+    var userData = JSON.parse(window.localStorage.getItem("userData"));
+    var deptCount = deptData.length
+    var deptCountSpace = (Math.ceil(deptCount / 3)) * 30
+    var userCount = userData.length
+    var userCountSpace =  Math.ceil(userCount / 3)
+    console.log('deptData',deptData,deptCount,deptCountSpace)
+    console.log('userData',userData,userCount,userCountSpace)
+
+    var userAddWin = new addWinBlock(uiBaseContainer, x, y, w,h, '新 增 帳 號',10,10, 14, '0xeeeeee', 'userAddWin_container',1,'0xaaaaff',5,'0x555555',1,0.5);
+        //userAddWin.name = 'userAddWin';
+
+    var userName = new inputBoxWithLabel(userAddWin,20,70,100,150,2,'帳 號 :','xxxx',11,'0xffffff','0x333333',2,'0xffffff',0.1,'0xffffff')
+    userName.text = 'user name'
+
+    var idNumber = new inputBoxWithLabel(userAddWin,20,100,100,150,2,'ID number :','xxxx',11,'0xaaaaaa','0x888888',2,'0xffffff',0.1,'0x333333')
+    idNumber.text = 'ID Number'
+    idNumber.disabled = true
+    var idSN = new inputBoxWithLabel(userAddWin,20,130,100,150,2,'User SN :','xxxx',11,'0xaaaaaa','0x888888',2,'0xffffff',0.1,'0x333333')
+    idSN.text = 'User SN '
+    idSN.disabled = true
+
+  //  var userDept = new inputBoxWithLabel(userAddWin,20,160,100,150,2,'部 門 :','xxxx','1234',11,'0xffffff','0x333333',2,'0xffffff',0.1,'0xffffff')
+  //  userDept.text = '部門名稱'
+
+
+
+    //var userType = new getOptionGrp(userDataEditSession,20,390,'職 務 類 型:',userTypeList,3,110,'bg-dark','未指定')
+
+    var selSecOptionBtnGrp = new buildOptionGrpBtn(userAddWin,20,160,'組 別 名 稱',deptData,100,3,120,'未指定',11,9,'0xaaaaaa','0xeeeeee')
+
+
+
+
+
+
+    var userPW = new inputBoxWithLabel(userAddWin,20,220+deptCountSpace,100,150,2,'登入密碼 :','xxxx',11,'0xffffff','0x333333',2,'0xffffff',0.1,'0xffffff')
+    userPW.text = '1234'
+
+    var userPW_2 = new inputBoxWithLabel(userAddWin,20,250+deptCountSpace,100,150,2,'密碼確認 :','xxxx',11,'0xffffff','0x333333',2,'0xffffff',0.1,'0xffffff')
+    userPW_2.text = '1234'
+
+    var controlBtn = new buildWinControlBtn(userAddWin)
+    
+    
+   
+
+    var AddNewUserConfirm_Btn = new buildBtnScaleA(userAddWin,20,700,120,30,'確定新增','primary')
+    AddNewUserConfirm_Btn.name = 'AddNewUserConfirm_Btn'
+    AddNewUserConfirm_Btn.on('mousedown', function(){
+                        console.log('press 確定新增')
+
+                        });
+
+
+    
+    
+    
+    return userAddWin
+};
+
+ */   
+    
+
+    
+ 
+</script>
